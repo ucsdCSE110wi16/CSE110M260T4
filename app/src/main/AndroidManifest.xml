@@ -29,7 +29,9 @@
                 android:value=".RecipeSearchActivity" />
         </activity>
 
-        <activity android:name=".RecipeSearchActivity" >
+        <activity
+            android:name=".RecipeSearchActivity"
+            android:launchMode="singleTop" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
