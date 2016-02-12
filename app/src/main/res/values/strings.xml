@@ -3,6 +3,8 @@
     <string name="search_hint">Enter search term here…</string>
     <string name="action_settings">action_settings</string>
     <string name="search_title">search_title</string>
+    <string name="placeholder">Placeholder</string>
+    <string name="recipe_name">Placeholder for Recipe Name</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Placeholder</string>

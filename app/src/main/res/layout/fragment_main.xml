@@ -8,11 +8,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Placeholder"
+        android:text="@string/placeholder"
         android:id="@+id/placeholderTextView"
         android:layout_gravity="center_horizontal|top"
         android:textStyle="bold"
         android:layout_marginTop="10dp"
-        android:textSize="28sp"/>
+        android:textSize="24sp"/>
 
 </FrameLayout>
