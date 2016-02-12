@@ -4,9 +4,22 @@
     android:layout_height="match_parent"
     tools:context="com.ucsd.cse110.recipeforsuccess.SearchingViewFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/search_icon"
+        android:layout_width="119dp"
+        android:layout_height="119dp"
+        android:layout_gravity="center_horizontal|top"
+        android:src="@drawable/ic_search_black_36dp"
+        android:layout_marginTop="50dp" />
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Search for Recipe..."
+        android:id="@+id/searchingTextView"
+        android:layout_gravity="center_horizontal|top"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:textSize="28sp"/>
 </FrameLayout>
