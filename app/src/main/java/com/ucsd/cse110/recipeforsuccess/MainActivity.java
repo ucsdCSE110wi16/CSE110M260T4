@@ -25,6 +25,11 @@ public class MainActivity extends AppCompatActivity {
         ParseObject testObject = new ParseObject("TestObject");
         testObject.put("foo", "bar");
         testObject.saveInBackground();
+
+        MainFragment mainFragment = new MainFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, mainFragment)
+                .commit();
     }
 
     @Override
@@ -51,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
                 // Do whatever you need
                 getSupportFragmentManager().popBackStack();
 
-                SearchingViewFragment searchingFragment = new SearchingViewFragment();
+                MainFragment mainFragment = new MainFragment();
                 getSupportFragmentManager().beginTransaction()
-                        .remove(searchingFragment)
+                        .replace(R.id.fragment_container, mainFragment)
                         .commit();
                 return true;
             }
