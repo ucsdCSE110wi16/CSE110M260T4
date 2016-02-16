@@ -1,6 +1,7 @@
 package com.ucsd.cse110.recipeforsuccess;
 
 import android.app.SearchManager;
+import android.content.Intent;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,27 +10,50 @@ import android.view.MenuItem;
 import android.view.MenuInflater;
 import android.content.Context;
 import android.support.v7.widget.SearchView;
+import android.content.SharedPreferences;
+import android.widget.Toast;
+
 import com.parse.Parse;
 import com.parse.ParseObject;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Boolean firstTime = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Parse.enableLocalDatastore(this);
+        if ( isFirstTime() ) {
 
-        Parse.initialize(this);
-        ParseObject testObject = new ParseObject("TestObject");
-        testObject.put("foo", "bar");
-        testObject.saveInBackground();
+            Parse.enableLocalDatastore(this);
+
+            Parse.initialize(this);
+            ParseObject testObject = new ParseObject("TestObject");
+            testObject.put("foo", "bar");
+            testObject.saveInBackground();
+        }
 
         MainFragment mainFragment = new MainFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, mainFragment)
                 .commit();
+
+        handleIntent(getIntent());
+    }
+
+    private void handleIntent(Intent intent) {
+        if (Intent.ACTION_VIEW.equals(intent.getAction())) {
+            String selectedRecipe = intent.getStringExtra(RecipeSearchActivity.EXTRA_MESSAGE);
+            Toast.makeText(this, selectedRecipe + " selected", Toast.LENGTH_LONG).show();
+
+            //Start the detail recipe view fragment
+            RecipeDetailViewFragment fragment = new RecipeDetailViewFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .commit();
+        }
     }
 
     @Override
@@ -82,6 +106,19 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean isFirstTime() {
+        if (firstTime == null) {
+            SharedPreferences mPreferences = this.getSharedPreferences("first_time", Context.MODE_PRIVATE);
+            firstTime = mPreferences.getBoolean("firstTime", true);
+            if (firstTime) {
+                SharedPreferences.Editor editor = mPreferences.edit();
+                editor.putBoolean("firstTime", false);
+                editor.commit();
+            }
+        }
+        return firstTime;
     }
 
 }

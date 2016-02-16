@@ -7,10 +7,10 @@ import android.view.View;
 import android.content.Intent;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
-
 
 public class RecipeSearchActivity extends ListActivity {
+
+    public final static String EXTRA_MESSAGE = "com.ucsd.cse110.recipeforsuccess.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,11 @@ public class RecipeSearchActivity extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         String item = (String) getListAdapter().getItem(position);
-        Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
+
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.putExtra(EXTRA_MESSAGE, item);
+        startActivity(intent);
     }
 
     private void doMySearch(String query) {
