@@ -13,8 +13,6 @@ import android.view.ViewGroup;
  */
 public class RecipeDetailViewFragment extends Fragment {
 
-
-
     public RecipeDetailViewFragment() {
         // Required empty public constructor
     }

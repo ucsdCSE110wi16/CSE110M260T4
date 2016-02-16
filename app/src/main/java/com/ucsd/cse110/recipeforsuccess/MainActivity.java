@@ -12,20 +12,22 @@ import android.content.Context;
 import android.support.v7.widget.SearchView;
 import android.content.SharedPreferences;
 import android.widget.Toast;
+import android.widget.Button;
+import android.view.View;
 
 import com.parse.Parse;
 import com.parse.ParseObject;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Boolean firstTime = null;
+    private static Boolean bParseInitialized = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if ( isFirstTime() ) {
+        if ( bParseInitialized == false ) {
 
             Parse.enableLocalDatastore(this);
 
@@ -33,26 +35,41 @@ public class MainActivity extends AppCompatActivity {
             ParseObject testObject = new ParseObject("TestObject");
             testObject.put("foo", "bar");
             testObject.saveInBackground();
-        }
 
-        MainFragment mainFragment = new MainFragment();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, mainFragment)
-                .commit();
+            MainFragment mainFragment = new MainFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, mainFragment)
+                    .commit();
+
+            bParseInitialized = true;
+        }
 
         handleIntent(getIntent());
     }
 
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_VIEW.equals(intent.getAction())) {
-            String selectedRecipe = intent.getStringExtra(RecipeSearchActivity.EXTRA_MESSAGE);
-            Toast.makeText(this, selectedRecipe + " selected", Toast.LENGTH_LONG).show();
 
-            //Start the detail recipe view fragment
-            RecipeDetailViewFragment fragment = new RecipeDetailViewFragment();
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
-                    .commit();
+            Bundle extras = intent.getExtras();
+
+            if( extras.containsKey(RecipeSearchActivity.EXTRA_MESSAGE)  ) {
+                String selectedRecipe = intent.getStringExtra(RecipeSearchActivity.EXTRA_MESSAGE);
+                Toast.makeText(this, selectedRecipe + " selected", Toast.LENGTH_LONG).show();
+
+                //Start the detail recipe view fragment
+                RecipeDetailViewFragment fragment = new RecipeDetailViewFragment();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, fragment)
+                        .commit();
+            } else if( extras.containsKey(MainFragment.SEARCH_TERM) ) {
+                String queryString = intent.getStringExtra(MainFragment.SEARCH_TERM);
+                Toast.makeText(this, queryString + " searched", Toast.LENGTH_LONG).show();
+
+                Intent new_intent = new Intent(MainActivity.this, RecipeSearchActivity.class);
+                new_intent.setAction(Intent.ACTION_SEARCH);
+                new_intent.putExtra(SearchManager.QUERY, queryString);
+                startActivity(new_intent);
+            }
         }
     }
 
@@ -106,19 +123,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private boolean isFirstTime() {
-        if (firstTime == null) {
-            SharedPreferences mPreferences = this.getSharedPreferences("first_time", Context.MODE_PRIVATE);
-            firstTime = mPreferences.getBoolean("firstTime", true);
-            if (firstTime) {
-                SharedPreferences.Editor editor = mPreferences.edit();
-                editor.putBoolean("firstTime", false);
-                editor.commit();
-            }
-        }
-        return firstTime;
     }
 
 }
