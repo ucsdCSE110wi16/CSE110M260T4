@@ -17,8 +17,10 @@ public class MainActivity extends AppCompatActivity {
         Parse.enableLocalDatastore(this);
 
         Parse.initialize(this);
-        ParseObject testObject = new ParseObject("TestObject");
-        testObject.put("foo", "bar");
+        ParseObject testObject = new ParseObject("Ingredients");
+        testObject.put("Name", "beef");
         testObject.saveInBackground();
+        
+
     }
 }
