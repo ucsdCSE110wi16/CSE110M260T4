@@ -1,0 +1,6 @@
+This is how you put a new ingredient(beef) in the "Ingredients" column that we already created on Parse.
+
+Parse.initialize(this);
+        ParseObject testObject = new ParseObject("Ingredients");
+        testObject.put("Name", "beef");
+        testObject.saveInBackground();
