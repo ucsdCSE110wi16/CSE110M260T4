@@ -1,4 +1,5 @@
 This is how you put a new ingredient(beef) in the "Ingredients" column that we already created on Parse.
+Put that in the main activity in the method onCreate()
 
 Parse.initialize(this);
         ParseObject testObject = new ParseObject("Ingredients");
