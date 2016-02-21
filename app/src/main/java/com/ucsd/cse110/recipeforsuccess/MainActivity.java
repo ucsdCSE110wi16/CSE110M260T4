@@ -1,30 +1,29 @@
 package com.ucsd.cse110.recipeforsuccess;
 
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MenuInflater;
-import android.content.Context;
 import android.support.v7.widget.SearchView;
-import android.content.SharedPreferences;
-import android.widget.TextView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
-import android.widget.Button;
-import android.view.View;
 
 import com.parse.Parse;
 import com.parse.ParseObject;
+
+import java.text.ParseException;
 
 public class MainActivity extends AppCompatActivity {
 
     private static Boolean bParseInitialized = false;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    //@Override
+    // This can be used for loading our database
+    protected void onCreate(Bundle savedInstanceState, ParseObject objectName) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -33,9 +32,11 @@ public class MainActivity extends AppCompatActivity {
             Parse.enableLocalDatastore(this);
 
             Parse.initialize(this);
-            ParseObject testObject = new ParseObject("TestObject");
-            testObject.put("foo", "bar");
-            testObject.saveInBackground();
+            ParseObject newObject = new ParseObject(objectName.toString());
+
+            //TODO: Discuss options for passing in data that should be put in the database
+            newObject.put("foo", "bar");
+            newObject.saveInBackground();
 
             MainFragment mainFragment = new MainFragment();
             getSupportFragmentManager().beginTransaction()
@@ -47,6 +48,21 @@ public class MainActivity extends AppCompatActivity {
 
         handleIntent(getIntent());
     }
+
+    //This will be used for querying out database
+    //
+    //TODO: The return will need to be changed to handle the data
+    //
+    //TODO: The parameter will also need to be changed depending on how many strings are queried
+    public void queryDatabse(java.util.List<ParseObject> object, ParseException exception){
+        if (exception == null) {
+        } else{
+            String objectToQuery = object.toString();
+            //TODO: meet and figure out how to pass objects to be queried
+            //ParseOuery queryObject = new ParseOuery(objectToQuery);
+        }
+    }
+
 
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_VIEW.equals(intent.getAction())) {
