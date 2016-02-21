@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.content.Context;
 import android.support.v7.widget.SearchView;
 import android.content.SharedPreferences;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Button;
 import android.view.View;

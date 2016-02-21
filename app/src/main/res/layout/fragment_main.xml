@@ -6,7 +6,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.ucsd.cse110.recipeforsuccess.MainFragment">
+    tools:context="com.ucsd.cse110.recipeforsuccess.MainFragment"
+    android:background="#FFAAEFDF">
 
     <LinearLayout
         android:id="@+id/recipe_search_container"
@@ -36,7 +37,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="20dp"
-        />
+        android:layout_marginTop="20dp" />
 
     <EditText
         android:layout_width="600px"
@@ -44,7 +45,7 @@
         android:id="@+id/editText"
         android:inputType="text"
         android:hint=" Enter name of recipe or ingredient"
-        android:background="#e0e0e0"
+        android:background="#d9d9d9"
         android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true" />
 
@@ -55,9 +56,11 @@
         android:id="@+id/button"
         android:clickable="true"
         android:contextClickable="false"
-        android:background="@color/colorAccent"
         android:layout_below="@+id/editText"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignLeft="@+id/imageView"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_marginTop="36dp"
+        android:background="#FFD64B" />
 
 </RelativeLayout>
 <!--
