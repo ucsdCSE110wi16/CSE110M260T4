@@ -21,14 +21,14 @@ public class MainActivity extends AppCompatActivity {
 
     private static Boolean bParseInitialized = false;
 
-    //@Override
+    @Override
     // This can be used for loading our database
-    protected void onCreate(Bundle savedInstanceState, ParseObject objectName) {
+    protected void onCreate(Bundle savedInstanceState/*, ParseObject objectName*/) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         if ( bParseInitialized == false ) {
-
+/*
             Parse.enableLocalDatastore(this);
 
             Parse.initialize(this);
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             //TODO: Discuss options for passing in data that should be put in the database
             newObject.put("foo", "bar");
             newObject.saveInBackground();
-
+*/
             MainFragment mainFragment = new MainFragment();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, mainFragment)
