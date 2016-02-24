@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if ( bParseInitialized == false ) {
+        if (!bParseInitialized) {
 /*
             Parse.enableLocalDatastore(this);
 
