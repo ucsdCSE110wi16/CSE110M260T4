@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
             Parse.initialize(this);
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Recipe");
-            query.whereEqualTo("Name", "mac n cheese");
+            query.whereContains("Name", "mac");
 
             query.findInBackground(new FindCallback<ParseObject>() {
                 public void done(List<ParseObject> Ingredients, ParseException e) {
