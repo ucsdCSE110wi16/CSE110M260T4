@@ -14,8 +14,11 @@ import android.widget.Toast;
 
 import com.parse.Parse;
 import com.parse.ParseObject;
-
-import java.text.ParseException;
+import com.parse.ParseQuery;
+import java.util.List;
+import com.parse.ParseException;
+import com.parse.*;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,16 +31,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (!bParseInitialized) {
-/*
+
             Parse.enableLocalDatastore(this);
 
             Parse.initialize(this);
-            ParseObject newObject = new ParseObject(objectName.toString());
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Recipe");
+            query.whereEqualTo("Name", "mac n cheese");
 
-            //TODO: Discuss options for passing in data that should be put in the database
-            newObject.put("foo", "bar");
-            newObject.saveInBackground();
-*/
+            query.findInBackground(new FindCallback<ParseObject>() {
+                public void done(List<ParseObject> Ingredients, ParseException e) {
+                    if (e == null) {
+                        Log.d("mac n cheese", "Retrieved " + Ingredients.toString() + " mac n cheese index");
+                    } else {
+                        Log.d("mac n cheese", "Error: " + e.getMessage());
+                    }
+                }
+            })
+            ;
+
             MainFragment mainFragment = new MainFragment();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, mainFragment)
