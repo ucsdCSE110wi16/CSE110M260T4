@@ -44,15 +44,15 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-            ParseQuery<ParseObject> query = ParseQuery.getQuery("Ingredients");
-            query.whereEqualTo("Name", "paprika");
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Recipe");
+            query.whereContains("Name", "mac n cheese");
 
             query.findInBackground(new FindCallback<ParseObject>() {
                 public void done(List<ParseObject> Ingredients, ParseException e) {
                     if (e == null) {
-                        Log.d("paprika", "Retrieved " + Ingredients.toString() + " paprika's index");
+                        Log.d("mac n cheese", "Retrieved " + Ingredients.toString() + " mac n cheese index");
                     } else {
-                        Log.d("paprika", "Error: " + e.getMessage());
+                        Log.d("mac n cheese", "Error: " + e.getMessage());
                     }
                 }
             })
