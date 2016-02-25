@@ -34,20 +34,27 @@ public class MainActivity extends AppCompatActivity {
 
             Parse.enableLocalDatastore(this);
 
+            //this just needs to happen once per app launch.
+            //this shuold stay in onCreate
             Parse.initialize(this);
+
+            //////////////////Start Parse stuff to move/////////////////
+            String searchQuery = "mac";
+
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Recipe");
-            query.whereContains("Name", "mac");
+            query.whereContains("Name", searchQuery);
 
             query.findInBackground(new FindCallback<ParseObject>() {
-                public void done(List<ParseObject> Ingredients, ParseException e) {
+                public void done(List<ParseObject> Recipe, ParseException e) {
                     if (e == null) {
-                        Log.d("mac n cheese", "Retrieved " + Ingredients.toString() + " mac n cheese index");
+                        Log.d("mac n cheese", "Retrieved " + Recipe.toString() + " mac n cheese index");
                     } else {
                         Log.d("mac n cheese", "Error: " + e.getMessage());
                     }
                 }
             })
             ;
+            /////////////////End Parse stuff to move/////////////
 
             MainFragment mainFragment = new MainFragment();
             getSupportFragmentManager().beginTransaction()
