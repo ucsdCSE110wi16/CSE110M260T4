@@ -72,6 +72,16 @@ public class RecipeDetailViewFragment extends Fragment {
                 for (ParseObject recipe : recipeList) {
                     TextView recipeTitleBox = (TextView) v.findViewById(R.id.recipeTitle);
                     recipeTitleBox.setText(recipe.get("Name").toString());
+
+                    TextView recipeDetailBox = (TextView) v.findViewById(R.id.recipeDetails);
+                    recipeDetailBox.setText(recipe.get("Description").toString());
+
+                    TextView recipeDirectionlBox = (TextView) v.findViewById(R.id.recipeInstructions);
+                    recipeDirectionlBox.setText(recipe.get("Directions").toString());
+
+                    //TextView recipeIngredientslBox = (TextView) v.findViewById(R.id.recipeIngredients);
+                    //recipeIngredientslBox.setText(recipe.get("Ingredients").toString());
+
                 }
 
 
