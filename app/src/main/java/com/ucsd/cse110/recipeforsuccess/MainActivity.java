@@ -110,7 +110,10 @@ public class MainActivity extends AppCompatActivity {
                         .replace(R.id.fragment_container, fragment)
                         .commit();
             } else if( extras.containsKey(MainFragment.SEARCH_TERM) ) {
+
                 String queryString = intent.getStringExtra(MainFragment.SEARCH_TERM);
+                queryString = queryString.toLowerCase();
+                //should probably add something here that will catch an empty search
                 Toast.makeText(this, queryString + " searched", Toast.LENGTH_LONG).show();
 
                 Intent new_intent = new Intent(MainActivity.this, RecipeSearchActivity.class);
