@@ -28,7 +28,19 @@ public class RecipeDetailViewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recipe_detail_view, container, false);
+        View v = inflater.inflate(R.layout.fragment_recipe_detail_view, container, false);
+
+        getRecipeDetails();
+
+        return v;
     }
 
+    //this is the function to get all the details to populate this view
+    void getRecipeDetails(){
+
+        MainActivity activity = (MainActivity) getActivity();
+        String objectID = activity.getCurSelectedObjectId();
+        //object ID is the current selected item.  Can be used to get all the details.
+
+    }
 }

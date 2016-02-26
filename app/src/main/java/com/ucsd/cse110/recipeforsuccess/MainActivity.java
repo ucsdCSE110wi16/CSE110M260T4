@@ -23,6 +23,8 @@ import android.util.Log;
 public class MainActivity extends AppCompatActivity {
 
     private static Boolean bParseInitialized = false;
+    private String curSelectedRecipeName = null;
+    private String curSelectedObjectId = null;
 
     @Override
     // This can be used for loading our database
@@ -67,6 +69,14 @@ public class MainActivity extends AppCompatActivity {
         handleIntent(getIntent());
     }
 
+    public String getCurSelectedObjectId() {
+        return this.curSelectedObjectId;
+    }
+
+    public String getCurSelectedRecipeName() {
+        return this.curSelectedRecipeName;
+    }
+
     //This will be used for querying out database
     //
     //TODO: The return will need to be changed to handle the data
@@ -87,9 +97,12 @@ public class MainActivity extends AppCompatActivity {
 
             Bundle extras = intent.getExtras();
 
-            if( extras.containsKey(RecipeSearchActivity.EXTRA_MESSAGE)  ) {
-                String selectedRecipe = intent.getStringExtra(RecipeSearchActivity.EXTRA_MESSAGE);
-                Toast.makeText(this, selectedRecipe + " selected", Toast.LENGTH_LONG).show();
+            if( extras.containsKey(RecipeSearchActivity.RECIPE_TITLE)  ) {
+
+                String selectedRecipeTitle = intent.getStringExtra(RecipeSearchActivity.RECIPE_TITLE);
+                String selectedRecipeObjectId = intent.getStringExtra(RecipeSearchActivity.RECIPE_OBJECT_ID);
+
+                Toast.makeText(this, selectedRecipeTitle + " selected - " + selectedRecipeObjectId, Toast.LENGTH_LONG).show();
 
                 //Start the detail recipe view fragment
                 RecipeDetailViewFragment fragment = new RecipeDetailViewFragment();
