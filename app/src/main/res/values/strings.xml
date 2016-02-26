@@ -8,4 +8,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Placeholder</string>
+    <string name="recipe_instructions">recipe_instructions</string>
+    <string name="recipe_details">recipe_details</string>
+    <string name="recipe_ingredients">Recipe ingredients placeholder</string>
 </resources>

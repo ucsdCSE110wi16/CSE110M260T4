@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         handleIntent(getIntent());
+
     }
 
     public String getCurSelectedObjectId() {
