@@ -3,10 +3,19 @@ package com.ucsd.cse110.recipeforsuccess;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.parse.FindCallback;
+import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.util.List;
 
 
 /**
@@ -16,6 +25,7 @@ public class RecipeDetailViewFragment extends Fragment {
 
     String objectID = null;
     String recipeName = null;
+    ParseObject parseObject = null;
 
     public RecipeDetailViewFragment() {
         // Required empty public constructor
@@ -34,24 +44,43 @@ public class RecipeDetailViewFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_recipe_detail_view, container, false);
 
-        getRecipeDetails();
+        getRecipeDetails(v);
         fillInViewContents(v);
 
         return v;
     }
 
     //this is the function to get all the details to populate this view
-    void getRecipeDetails(){
+    void getRecipeDetails(final View v){
 
         MainActivity activity = (MainActivity) getActivity();
         this.objectID = activity.getCurSelectedObjectId();
         this.recipeName = activity.getCurSelectedRecipeName();
+
+        ParseQuery<ParseObject> search = ParseQuery.getQuery("Recipe");
+        search.whereEqualTo("Name", this.recipeName);
+        search.orderByAscending("Name");
+        search.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> recipeList, ParseException e) {
+                if (e == null) {
+                    Log.d("recipe", "Retrieved " + recipeList.size() + "recipes");
+                } else {
+                    Log.d("recipe", "Error: " + e.getMessage());
+                }
+
+                int num_search_results = recipeList.size();
+                for (ParseObject recipe : recipeList) {
+                    TextView recipeTitleBox = (TextView) v.findViewById(R.id.recipeTitle);
+                    recipeTitleBox.setText(recipe.get("Name").toString());
+                }
+
+
+            }
+        });
     }
 
-    void fillInViewContents(View v){
-
-        TextView recipeTitleBox = (TextView) v.findViewById(R.id.recipeTitle);
-        recipeTitleBox.setText(this.recipeName.toUpperCase());
-
+    void fillInViewContents(View v) {
+        //TextView recipeTitleBox = (TextView) this.v.findViewById(R.id.recipeTitle);
+        //recipeTitleBox.setText(this.recipeName.toUpperCase());
     }
 }
