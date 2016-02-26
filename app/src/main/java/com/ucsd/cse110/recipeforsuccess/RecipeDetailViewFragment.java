@@ -6,12 +6,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class RecipeDetailViewFragment extends Fragment {
+
+    String objectID = null;
+    String recipeName = null;
 
     public RecipeDetailViewFragment() {
         // Required empty public constructor
@@ -31,6 +35,7 @@ public class RecipeDetailViewFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_recipe_detail_view, container, false);
 
         getRecipeDetails();
+        fillInViewContents(v);
 
         return v;
     }
@@ -39,8 +44,14 @@ public class RecipeDetailViewFragment extends Fragment {
     void getRecipeDetails(){
 
         MainActivity activity = (MainActivity) getActivity();
-        String objectID = activity.getCurSelectedObjectId();
-        //object ID is the current selected item.  Can be used to get all the details.
+        this.objectID = activity.getCurSelectedObjectId();
+        this.recipeName = activity.getCurSelectedRecipeName();
+    }
+
+    void fillInViewContents(View v){
+
+        TextView recipeTitleBox = (TextView) v.findViewById(R.id.recipeTitle);
+        recipeTitleBox.setText(this.recipeName.toUpperCase());
 
     }
 }

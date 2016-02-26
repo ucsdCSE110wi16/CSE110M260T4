@@ -117,7 +117,7 @@ public class RecipeSearchActivity extends ListActivity {
             {
                 MyListItem listItem = new MyListItem();
                 listItem.setTitle(String.format("%s", recipe.get("Name")));
-                listItem.setObjectId(String.format("Object ID %s", recipe.get("objectId")));
+                listItem.setObjectId(String.format("Object ID %s", recipe.getObjectId()));
                 listItems[i] = listItem;
                 i++;
             }
