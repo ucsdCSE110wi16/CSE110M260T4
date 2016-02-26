@@ -1,13 +1,53 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RecipeDetailViewFragment">
+    tools:context=".RecipeDetailViewFragment"
+    android:weightSum="1">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/recipe_name"
-        android:id="@+id/recipeTitle" />
-</LinearLayout>
+        android:id="@+id/recipeTitle"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/recipe_details"
+        android:id="@+id/recipeDetails"
+        android:layout_below="@+id/recipeTitle"
+        android:layout_alignLeft="@+id/recipeTitle"
+        android:layout_alignStart="@+id/recipeTitle"
+        android:layout_marginTop="25dp"
+        android:textAllCaps="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/recipe_instructions"
+        android:id="@+id/recipeInstructions"
+        android:layout_marginTop="80dp"
+        android:layout_below="@+id/recipeDetails"
+        android:layout_alignLeft="@+id/recipeDetails"
+        android:layout_alignStart="@+id/recipeIngredients" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/recipe_ingredients"
+        android:id="@+id/recipeIngredients"
+        android:layout_below="@+id/recipeDetails"
+        android:layout_alignLeft="@+id/recipeDetails"
+        android:layout_alignStart="@+id/recipeDetails"
+        android:layout_marginTop="30dp" />
+
+</RelativeLayout>
