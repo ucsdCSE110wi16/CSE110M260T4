@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.graphics.Typeface;
 
 
 /**
@@ -51,7 +52,10 @@ public class RecipeDetailViewFragment extends Fragment {
     void fillInViewContents(View v){
 
         TextView recipeTitleBox = (TextView) v.findViewById(R.id.recipeTitle);
-        recipeTitleBox.setText(this.recipeName.toUpperCase());
+        Typeface typeFace=Typeface.createFromAsset(getContext().getAssets(),"Pacifico.ttf");
+        recipeTitleBox.setTypeface(typeFace);
+        //recipeTitleBox.setText(this.recipeName.toUpperCase());
+        recipeTitleBox.setText(this.recipeName);
 
     }
 }
