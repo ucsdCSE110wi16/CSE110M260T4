@@ -21,7 +21,6 @@ import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import static org.hamcrest.Matchers.allOf;
@@ -30,7 +29,8 @@ import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.hasToString;
 import static org.hamcrest.Matchers.startsWith;
-
+import static org.hamcrest.Matchers.hasEntry;
+import static org.hamcrest.Matchers.anything;
 /**
  * Basic tests showcasing simple view matchers and actions like {@link ViewMatchers#withId},
  * {@link ViewActions#click} and {@link ViewActions#typeText}.
@@ -60,8 +60,9 @@ public class SearchByTitleScenario {
                 .perform(click());
 
         //Click the first item
-        onData(allOf(is(instanceOf(String.class)), is("A")))
+        onData(allOf(is(instanceOf(RecipeSearchActivity.MyListItem.class)), is(hasToString("Recipe Title 1"))))
                 .perform(click());
+
 
         //Confirm we got the recipe detail page
         onView(withId(R.id.recipeTitle))

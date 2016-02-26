@@ -104,6 +104,9 @@ public class MainActivity extends AppCompatActivity {
                 String selectedRecipeObjectId = intent.getStringExtra(RecipeSearchActivity.RECIPE_OBJECT_ID);
 
                 Toast.makeText(this, selectedRecipeTitle + " selected - " + selectedRecipeObjectId, Toast.LENGTH_LONG).show();
+                //set the values of the current selected items
+                this.curSelectedRecipeName = selectedRecipeTitle;
+                this.curSelectedObjectId = selectedRecipeObjectId;
 
                 //Start the detail recipe view fragment
                 RecipeDetailViewFragment fragment = new RecipeDetailViewFragment();
