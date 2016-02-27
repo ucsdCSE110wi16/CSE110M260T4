@@ -79,6 +79,7 @@ public class RecipeSearchActivity extends ListActivity {
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
+        
         MyListItem item = (MyListItem) getListAdapter().getItem(position);
 
         Intent intent = new Intent(this, MainActivity.class);

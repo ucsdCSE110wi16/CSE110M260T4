@@ -72,14 +72,21 @@ public class RecipeDetailViewFragment extends Fragment {
                 int num_search_results = recipeList.size();
                 for (ParseObject recipe : recipeList) {
                     TextView recipeTitleBox = (TextView) v.findViewById(R.id.recipeTitle);
+
+                    // Changing font of recipe title
                     Typeface typeFace = Typeface.createFromAsset(getContext().getAssets(),"Pacifico.ttf");
                     recipeTitleBox.setTypeface(typeFace);
                     recipeTitleBox.setText(recipe.get("Name").toString());
 
+                    // Testing font for recipe details and instructions
                     TextView recipeDetailBox = (TextView) v.findViewById(R.id.recipeDetails);
+                    Typeface typeFace2 = Typeface.createFromAsset(getContext().getAssets(), "Slabo13px-Regular.ttf");
+                    recipeDetailBox.setTypeface(typeFace2);
                     recipeDetailBox.setText(recipe.get("Description").toString());
 
                     TextView recipeDirectionlBox = (TextView) v.findViewById(R.id.recipeInstructions);
+                    Typeface typeFace3 = Typeface.createFromAsset(getContext().getAssets(), "Slabo13px-Regular.ttf");
+                    recipeDirectionlBox.setTypeface(typeFace3);
                     recipeDirectionlBox.setText(recipe.get("Directions").toString());
 
                     //TextView recipeIngredientslBox = (TextView) v.findViewById(R.id.recipeIngredients);
