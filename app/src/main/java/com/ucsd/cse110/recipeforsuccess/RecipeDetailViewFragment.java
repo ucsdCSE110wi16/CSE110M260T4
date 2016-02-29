@@ -17,12 +17,22 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.List;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.widget.ImageView;
+import java.net.URL;
+import java.net.HttpURLConnection;
+import java.io.InputStream;
+
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class RecipeDetailViewFragment extends Fragment {
+
+    private ImageView iv;
+    private Bitmap bitmap;
 
     String objectID = null;
     String recipeName = null;
@@ -36,6 +46,7 @@ public class RecipeDetailViewFragment extends Fragment {
         RecipeDetailViewFragment fragment = new RecipeDetailViewFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -48,7 +59,26 @@ public class RecipeDetailViewFragment extends Fragment {
         getRecipeDetails(v);
         fillInViewContents(v);
 
+
+
         return v;
+    }
+    public Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+
+        }
     }
 
     //this is the function to get all the details to populate this view
@@ -71,26 +101,39 @@ public class RecipeDetailViewFragment extends Fragment {
 
                 int num_search_results = recipeList.size();
                 for (ParseObject recipe : recipeList) {
-                    TextView recipeTitleBox = (TextView) v.findViewById(R.id.recipeTitle);
 
-                    // Changing font of recipe title
+                    // getting recipe title and changing font
+                    TextView recipeTitleBox = (TextView) v.findViewById(R.id.recipeTitle);
                     Typeface typeFace = Typeface.createFromAsset(getContext().getAssets(),"Pacifico.ttf");
                     recipeTitleBox.setTypeface(typeFace);
                     recipeTitleBox.setText(recipe.get("Name").toString());
 
-                    // Testing font for recipe details and instructions
+                    // getting recipe description and changing font
                     TextView recipeDetailBox = (TextView) v.findViewById(R.id.recipeDetails);
                     Typeface typeFace2 = Typeface.createFromAsset(getContext().getAssets(), "Slabo13px-Regular.ttf");
                     recipeDetailBox.setTypeface(typeFace2);
                     recipeDetailBox.setText(recipe.get("Description").toString());
 
-                    TextView recipeDirectionlBox = (TextView) v.findViewById(R.id.recipeInstructions);
+                    // getting recipe ingredients and changing font
+                    TextView recipeIngredientsBox = (TextView) v.findViewById(R.id.recipeIngredients);
                     Typeface typeFace3 = Typeface.createFromAsset(getContext().getAssets(), "Slabo13px-Regular.ttf");
-                    recipeDirectionlBox.setTypeface(typeFace3);
-                    recipeDirectionlBox.setText(recipe.get("Directions").toString());
+                    recipeIngredientsBox.setTypeface(typeFace3);
+                    recipeIngredientsBox.setText(recipe.get("Ingredients").toString());
 
-                    //TextView recipeIngredientslBox = (TextView) v.findViewById(R.id.recipeIngredients);
-                    //recipeIngredientslBox.setText(recipe.get("Ingredients").toString());
+                    // getting recipe instructions and changing font
+                    TextView recipeDirectionBox = (TextView) v.findViewById(R.id.recipeInstructions);
+                    Typeface typeFace4 = Typeface.createFromAsset(getContext().getAssets(), "Slabo13px-Regular.ttf");
+                    recipeDirectionBox.setTypeface(typeFace4);
+                    recipeDirectionBox.setText(recipe.get("Directions").toString());
+
+                    // getting recipe instructions and changing font
+                    //TextView recipeImageBox = (TextView) v.findViewById(R.id.recipeDetails);
+                    String url = recipe.get("img").toString();
+                    iv = (ImageView) v.findViewById(R.id.imageView2);
+                    bitmap = getBitmapFromURL(url);
+                    iv.setImageBitmap(bitmap);
+
+
 
                 }
 

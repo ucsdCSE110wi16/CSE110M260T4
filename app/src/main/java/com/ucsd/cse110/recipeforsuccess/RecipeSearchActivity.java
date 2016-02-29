@@ -82,9 +82,11 @@ public class RecipeSearchActivity extends ListActivity {
         
         MyListItem item = (MyListItem) getListAdapter().getItem(position);
 
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this,MainActivity.class);
         intent.setAction(Intent.ACTION_VIEW);
         intent.putExtra(RECIPE_TITLE, item.getTitle());
+
+        //should this be here?
         intent.putExtra(RECIPE_OBJECT_ID, item.getObjectID());
         startActivity(intent);
     }
