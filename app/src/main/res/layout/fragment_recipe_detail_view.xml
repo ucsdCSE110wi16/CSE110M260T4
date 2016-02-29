@@ -15,48 +15,67 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:text="@string/recipe_name"
         android:id="@+id/recipeTitle"
-        android:layout_marginLeft="10dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:textColor="@android:color/black"
-        android:textSize="40sp" />
+        android:textSize="40sp"
+        android:layout_centerHorizontal="true" />
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/recipe_details"
         android:id="@+id/recipeDetails"
-        android:layout_below="@+id/recipeTitle"
-        android:layout_alignLeft="@+id/recipeTitle"
-        android:layout_alignStart="@+id/recipeTitle"
-        android:layout_marginTop="15dp"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:layout_below="@+id/ratingBar"
+        android:layout_centerHorizontal="true"  />
+
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/recipe_ingredients"
         android:id="@+id/recipeIngredients"
-        android:layout_below="@+id/recipeDetails"
-        android:layout_alignLeft="@+id/recipeDetails"
-        android:layout_alignStart="@+id/recipeDetails"
-        android:layout_marginTop="15dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/recipe_instructions"
-        android:id="@+id/recipeInstructions"
         android:layout_marginTop="50dp"
         android:layout_below="@+id/recipeDetails"
-        android:layout_alignLeft="@+id/recipeDetails"
-        android:layout_alignStart="@+id/recipeIngredients"
-        android:layout_alignParentStart="false" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"  />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/recipeInstructions"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/recipeIngredients"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"/>
+
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:src="@drawable/cookies5"
+        android:contentDescription="@string/string"
+        android:layout_below="@+id/recipeTitle"
+        android:layout_centerHorizontal="true" />
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/ratingBar"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_below="@+id/imageView2"
+        android:layout_centerHorizontal="true"
+        android:numStars="5" />
+
+
 
 </RelativeLayout>
 

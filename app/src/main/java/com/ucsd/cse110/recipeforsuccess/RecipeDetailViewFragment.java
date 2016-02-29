@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.NumberPicker;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.graphics.Typeface;
 
@@ -24,13 +26,18 @@ import java.net.URL;
 import java.net.HttpURLConnection;
 import java.io.InputStream;
 
-
+import android.widget.Button;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class RecipeDetailViewFragment extends Fragment {
 
+    //variables for rating bar
+
+
+    //variables for image
     private ImageView iv;
     private Bitmap bitmap;
 
@@ -60,9 +67,13 @@ public class RecipeDetailViewFragment extends Fragment {
         fillInViewContents(v);
 
 
-
         return v;
     }
+
+
+
+
+    //function that gets image from url
     public Bitmap getBitmapFromURL(String src) {
         try {
             URL url = new URL(src);
@@ -84,7 +95,7 @@ public class RecipeDetailViewFragment extends Fragment {
     //this is the function to get all the details to populate this view
     void getRecipeDetails(final View v){
 
-        MainActivity activity = (MainActivity) getActivity();
+        final MainActivity activity = (MainActivity) getActivity();
         this.objectID = activity.getCurSelectedObjectId();
         this.recipeName = activity.getCurSelectedRecipeName();
 
@@ -104,7 +115,7 @@ public class RecipeDetailViewFragment extends Fragment {
 
                     // getting recipe title and changing font
                     TextView recipeTitleBox = (TextView) v.findViewById(R.id.recipeTitle);
-                    Typeface typeFace = Typeface.createFromAsset(getContext().getAssets(),"Pacifico.ttf");
+                    Typeface typeFace = Typeface.createFromAsset(getContext().getAssets(), "Pacifico.ttf");
                     recipeTitleBox.setTypeface(typeFace);
                     recipeTitleBox.setText(recipe.get("Name").toString());
 
@@ -126,13 +137,17 @@ public class RecipeDetailViewFragment extends Fragment {
                     recipeDirectionBox.setTypeface(typeFace4);
                     recipeDirectionBox.setText(recipe.get("Directions").toString());
 
+                    //commented out currently using a place holder
                     // getting recipe instructions and changing font
                     //TextView recipeImageBox = (TextView) v.findViewById(R.id.recipeDetails);
-                    String url = recipe.get("img").toString();
-                    iv = (ImageView) v.findViewById(R.id.imageView2);
-                    bitmap = getBitmapFromURL(url);
-                    iv.setImageBitmap(bitmap);
+                    //String url = recipe.get("img").toString();
+                    //iv = (ImageView) v.findViewById(R.id.imageView2);
+                    //bitmap = getBitmapFromURL(url);
+                    //iv.setImageBitmap(bitmap);
 
+                    // getting recipe rating
+                    RatingBar recipeRateBar = (RatingBar) v.findViewById(R.id.ratingBar);
+                    recipeRateBar.setRating(Integer.parseInt(recipe.get("Rating").toString()));
 
 
                 }
@@ -140,6 +155,9 @@ public class RecipeDetailViewFragment extends Fragment {
 
             }
         });
+
+
+
     }
 
     void fillInViewContents(View v) {
