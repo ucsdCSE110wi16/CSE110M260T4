@@ -40,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
             //this shuold stay in onCreate
             Parse.initialize(this);
 
-
+            //////////////////Start Parse stuff to move/////////////////
+            /////////////////End Parse stuff to move/////////////
 
             MainFragment mainFragment = new MainFragment();
             getSupportFragmentManager().beginTransaction()

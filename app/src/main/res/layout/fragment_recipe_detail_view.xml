@@ -60,7 +60,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView2"
-        android:src="@drawable/cookies5"
         android:contentDescription="@string/string"
         android:layout_below="@+id/recipeTitle"
         android:layout_centerHorizontal="true" />
