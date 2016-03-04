@@ -24,6 +24,8 @@ public class RecipeSearchActivity extends ListActivity {
 
     public final static String RECIPE_TITLE = "com.ucsd.cse110.recipeforsuccess.RECIPE_TITLE";
     public final static String RECIPE_OBJECT_ID = "com.ucsd.cse110.recipeforsuccess.RECIPE_OBJECT_ID";
+
+    public final static String ACTION_NO_RESULTS = "com.ucsd.cse110.recipeforsuccess.ACTION_NO_RESULTS";
     //public final  View v;
 
     /**
@@ -126,6 +128,13 @@ public class RecipeSearchActivity extends ListActivity {
         startActivity(intent);
     }
 
+    private void handleNoResultsFound(){
+
+        Intent intent = new Intent(this,MainActivity.class);
+        intent.setAction(ACTION_NO_RESULTS);
+        startActivity(intent);
+    }
+
     private void doMySearch(String query) {
 
         //query is the string that the user searched for
@@ -145,14 +154,7 @@ public class RecipeSearchActivity extends ListActivity {
 
                 //if no recipes are found matching search
                 if (recipeList.size() == 0) {
-                     //TextView recipeRateBar = (TextView) v.findViewById(R.id.textView);
-                     MyListItem[] blankListItems = new MyListItem[1];
-                     MyListItem blankListItem = new MyListItem();
-                     blankListItem.setTitle("Sorry There Were No Recipes Found Matching Your Search");
-                     blankListItems[0] = blankListItem;
-                     //set list data
-                     setListData(blankListItems);
-
+                    handleNoResultsFound();
                 }
                 //if recipes are found matching search
                 else {

@@ -44,7 +44,6 @@ public class MainFragment extends Fragment implements OnClickListener{
 
             mSearchTerm = (EditText) v.findViewById(R.id.editText);
 
-
         }
         return v;
     }
