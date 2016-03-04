@@ -2,19 +2,20 @@ package com.ucsd.cse110.recipeforsuccess;
 
 import android.app.ListActivity;
 import android.app.SearchManager;
-import android.os.Bundle;
-import android.view.View;
 import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
-import com.parse.Parse;
+
+import com.parse.FindCallback;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+
 import java.util.List;
-import com.parse.ParseException;
-import com.parse.*;
-import android.util.Log;
+
 
 public class RecipeSearchActivity extends ListActivity {
 
@@ -160,4 +161,5 @@ public class RecipeSearchActivity extends ListActivity {
             }
         });
     }
+
 }
