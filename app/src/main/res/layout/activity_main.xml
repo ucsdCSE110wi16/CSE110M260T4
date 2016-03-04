@@ -24,4 +24,21 @@
         android:layout_alignRight="@+id/fragment_container"
         android:layout_alignEnd="@+id/fragment_container" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search By Recipe"
+        android:id="@+id/byRecipeButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search By Ingredient"
+        android:id="@+id/byIngredientButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"  />
+
 </RelativeLayout>

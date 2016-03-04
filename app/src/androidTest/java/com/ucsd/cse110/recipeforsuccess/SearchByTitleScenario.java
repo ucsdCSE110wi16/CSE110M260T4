@@ -37,12 +37,16 @@ import static org.hamcrest.Matchers.anything;
  * <p>
  * Note that there is no need to tell Espresso that a view is in a different {@link Activity}.
  */
+
+
+//We need 3 scenarios
+
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class SearchByTitleScenario {
 
-    public static final String STRING_TO_BE_TYPED = "Espresso";
-    public static final String RECIPE_TITLE = "Placeholder for Recipe Name";
+    public static final String STRING_TO_BE_TYPED = "cheese";
+    public static final String RECIPE_TITLE = "mac n cheese";
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
@@ -60,7 +64,7 @@ public class SearchByTitleScenario {
                 .perform(click());
 
         //Click the first item
-        onData(allOf(is(instanceOf(RecipeSearchActivity.MyListItem.class)), is(hasToString("Recipe Title 1"))))
+        onData(allOf(is(instanceOf(RecipeSearchActivity.MyListItem.class)), is(hasToString("mac n cheese"))))
                 .perform(click());
 
 

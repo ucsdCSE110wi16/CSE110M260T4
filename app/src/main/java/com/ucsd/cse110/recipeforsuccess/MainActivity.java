@@ -10,21 +10,21 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
+import android.widget.Button;
+import android.util.DisplayMetrics;
 
 import com.parse.Parse;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import java.util.List;
-import com.parse.ParseException;
-import com.parse.*;
-import android.util.Log;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static Boolean bParseInitialized = false;
     private String curSelectedRecipeName = null;
     private String curSelectedObjectId = null;
+
+    Button byIngredientButton;
+    Button byRecipeButton;
 
     @Override
     // This can be used for loading our database
@@ -37,52 +37,88 @@ public class MainActivity extends AppCompatActivity {
             Parse.enableLocalDatastore(this);
 
             //this just needs to happen once per app launch.
-            //this shuold stay in onCreate
+            //this should stay in onCreate
             Parse.initialize(this);
-
-            //////////////////Start Parse stuff to move/////////////////
-            /////////////////End Parse stuff to move/////////////
-
-            MainFragment mainFragment = new MainFragment();
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, mainFragment)
-                    .commit();
-
             bParseInitialized = true;
+
+            setRecipeSearchActive();
+
+            //layout the buttons
+            layoutButtons();
         }
 
         handleIntent(getIntent());
-
     }
 
+    /**
+     * Handles the setup of the buttons to switch between the recipe and ingredient search
+     */
+    private void layoutButtons(){
+        // Use DisplayMetrics to get the width
+        // so we can get the button to share half the screen
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        int width = displaymetrics.widthPixels - 40;
+        int buttonWidth = width/2;
+
+        //Setup the ingredient button
+        byIngredientButton = (Button) findViewById(R.id.byIngredientButton);
+        byIngredientButton.setOnClickListener(this);
+        byIngredientButton.setWidth(buttonWidth);
+
+        //setup the recipe button
+        byRecipeButton = (Button) findViewById(R.id.byRecipeButton);
+        byRecipeButton.setOnClickListener(this);
+        byRecipeButton.setWidth(buttonWidth);
+
+        //disable it because we are going to start with this tab
+        byRecipeButton.setEnabled(false);
+    }
+
+    /**
+     * Method to bring in the recipe search into view
+     */
+    private void setRecipeSearchActive(){
+        MainFragment mainFragment = new MainFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, mainFragment)
+                .commit();
+    }
+
+    /**
+     * Method to bring in the ingredient search into view
+     */
+    private void setIngredientSearchActive(){
+        IngredientSearchViewFragment fragment = new IngredientSearchViewFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit();
+    }
+
+    /**
+     * Method allowing the fragments to get current object id of the selected recipe
+     */
     public String getCurSelectedObjectId() {
         return this.curSelectedObjectId;
     }
 
+    /**
+     * Method allowing the fragments to get current name of the selected recipe
+     */
     public String getCurSelectedRecipeName() {
         return this.curSelectedRecipeName;
     }
 
-    //This will be used for querying out database
-    //
-    //TODO: The return will need to be changed to handle the data
-    //
-    //TODO: The parameter will also need to be changed depending on how many strings are queried
-    public void queryDatabse(java.util.List<ParseObject> object, ParseException exception){
-        if (exception == null) {
-        } else{
-            String objectToQuery = object.toString();
-            //TODO: meet and figure out how to pass objects to be queried
-            //ParseOuery queryObject = new ParseOuery(objectToQuery);
-        }
-    }
 
-
+    /**
+     * Handler for passing into and back from the search activity.
+     */
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_VIEW.equals(intent.getAction())) {
 
             Bundle extras = intent.getExtras();
 
+            //Catch the return from the search activity.
             if( extras.containsKey(RecipeSearchActivity.RECIPE_TITLE)  ) {
 
                 String selectedRecipeTitle = intent.getStringExtra(RecipeSearchActivity.RECIPE_TITLE);
@@ -98,7 +134,8 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, fragment)
                         .commit();
-            } else if( extras.containsKey(MainFragment.SEARCH_TERM) ) {
+            } //Launch the search activity passing it the search term.
+            else if( extras.containsKey(MainFragment.SEARCH_TERM) ) {
 
                 String queryString = intent.getStringExtra(MainFragment.SEARCH_TERM);
                 queryString = queryString.toLowerCase();
@@ -163,6 +200,23 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.byRecipeButton:
+                setRecipeSearchActive();
+                this.byRecipeButton.setEnabled(false);
+                this.byIngredientButton.setEnabled(true);
+                break;
+            case R.id.byIngredientButton:
+                setIngredientSearchActive();
+                this.byRecipeButton.setEnabled(true);
+                this.byIngredientButton.setEnabled(false);
+                break;
+
+        }
     }
 
 }
