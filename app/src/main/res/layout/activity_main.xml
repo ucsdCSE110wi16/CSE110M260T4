@@ -9,21 +9,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.ucsd.cse110.recipeforsuccess.MainActivity">
 
-    <LinearLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView3"
-        android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/fragment_container"
-        android:layout_alignEnd="@+id/fragment_container" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,5 +25,21 @@
         android:id="@+id/byIngredientButton"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"  />
+
+    <LinearLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/byIngredientButton"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView3"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/fragment_container"
+        android:layout_alignEnd="@+id/fragment_container" />
 
 </RelativeLayout>

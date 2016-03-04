@@ -41,11 +41,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Parse.initialize(this);
             bParseInitialized = true;
 
-            setRecipeSearchActive();
-
-            //layout the buttons
-            layoutButtons();
         }
+
+        //layout the buttons
+        layoutButtons();
+
+        setRecipeSearchActive();
 
         handleIntent(getIntent());
     }
@@ -73,6 +74,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //disable it because we are going to start with this tab
         byRecipeButton.setEnabled(false);
+    }
+
+    /**
+     * Hide the recipe/ingredient search buttons
+     */
+    private void hideButtons(boolean hide){
+        int visibility;
+        if (hide) {
+            visibility = View.GONE;
+        } else {
+            visibility = View.VISIBLE;
+        }
+
+        byRecipeButton.setVisibility(visibility);
+        byIngredientButton.setVisibility(visibility);
     }
 
     /**
@@ -118,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             Bundle extras = intent.getExtras();
 
-            //Catch the return from the search activity.
+            //Catch the return from the search activity and launch recipe details
             if( extras.containsKey(RecipeSearchActivity.RECIPE_TITLE)  ) {
 
                 String selectedRecipeTitle = intent.getStringExtra(RecipeSearchActivity.RECIPE_TITLE);
@@ -128,6 +144,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //set the values of the current selected items
                 this.curSelectedRecipeName = selectedRecipeTitle;
                 this.curSelectedObjectId = selectedRecipeObjectId;
+
+                //hide the buttons
+                hideButtons(true);
 
                 //Start the detail recipe view fragment
                 RecipeDetailViewFragment fragment = new RecipeDetailViewFragment();
@@ -141,6 +160,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 queryString = queryString.toLowerCase();
                 //should probably add something here that will catch an empty search
                 Toast.makeText(this, queryString + " searched", Toast.LENGTH_LONG).show();
+
+                //hide the buttons
+                hideButtons(false);
 
                 Intent new_intent = new Intent(MainActivity.this, RecipeSearchActivity.class);
                 new_intent.setAction(Intent.ACTION_SEARCH);
