@@ -21,15 +21,12 @@ public class RecipeSearchActivity extends ListActivity {
 
     public final static String RECIPE_TITLE = "com.ucsd.cse110.recipeforsuccess.RECIPE_TITLE";
     public final static String RECIPE_OBJECT_ID = "com.ucsd.cse110.recipeforsuccess.RECIPE_OBJECT_ID";
-<<<<<<< HEAD
     //public final  View v;
-=======
 
     /**
      * This is an adapter for the search results received from Parse
      * so that it can be displayed in the ListActivity.
      */
->>>>>>> 6b42708ceb231a67543693e6cf7d301037f5ea46
     public class MyListItem {
         private String recipeTitle;
         private String objectID;
