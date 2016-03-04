@@ -1,0 +1,82 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true">
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RecipeDetailViewFragment"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:id="@+id/recipeTitle"
+        android:textColor="@android:color/black"
+        android:textSize="40sp"
+        android:layout_centerHorizontal="true" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/recipeDetails"
+        android:textAllCaps="false"
+        android:layout_below="@+id/ratingBar"
+        android:layout_centerHorizontal="true"  />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/recipeIngredients"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/recipeDetails"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"  />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/recipeInstructions"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/recipeIngredients"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"/>
+
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:src="@drawable/cookies5"
+        android:contentDescription="@string/string"
+        android:layout_below="@+id/recipeTitle"
+        android:layout_centerHorizontal="true" />
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/ratingBar"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_below="@+id/imageView2"
+        android:layout_centerHorizontal="true"
+        android:numStars="5" />
+
+
+
+</RelativeLayout>
+
+</ScrollView>
