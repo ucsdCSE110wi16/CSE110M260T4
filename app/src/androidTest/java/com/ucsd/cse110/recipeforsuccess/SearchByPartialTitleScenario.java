@@ -33,6 +33,7 @@ import static org.hamcrest.Matchers.startsWith;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.anything;
 import android.support.test.espresso.Espresso;
+
 /**
  * Basic tests showcasing simple view matchers and actions like {@link ViewMatchers#withId},
  * {@link ViewActions#click} and {@link ViewActions#typeText}.
@@ -57,6 +58,8 @@ public class SearchByPartialTitleScenario {
         onView(withId(R.id.editText))
                 .perform(click())
                 .perform(typeText(STRING_TO_BE_TYPED), closeSoftKeyboard());
+
+
 
         // Click the search button
         onView(withId(R.id.button))
