@@ -11,6 +11,9 @@ import android.widget.ListView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import android.widget.TextView;
+import android.widget.Toast;
+import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -21,6 +24,7 @@ public class RecipeSearchActivity extends ListActivity {
 
     public final static String RECIPE_TITLE = "com.ucsd.cse110.recipeforsuccess.RECIPE_TITLE";
     public final static String RECIPE_OBJECT_ID = "com.ucsd.cse110.recipeforsuccess.RECIPE_OBJECT_ID";
+    //public final  View v;
 
     /**
      * This is an adapter for the search results received from Parse
@@ -82,6 +86,7 @@ public class RecipeSearchActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         handleIntent(getIntent());
+
     }
 
     private void setListData(MyListItem[] searchResults) {
@@ -138,26 +143,36 @@ public class RecipeSearchActivity extends ListActivity {
                 }
 
 
-            int num_search_results = recipeList.size();
+                //if no recipes are found matching search
+                if (recipeList.size() == 0) {
+                     //TextView recipeRateBar = (TextView) v.findViewById(R.id.textView);
+                     MyListItem[] blankListItems = new MyListItem[1];
+                     MyListItem blankListItem = new MyListItem();
+                     blankListItem.setTitle("Sorry There Were No Recipes Found Matching Your Search");
+                     blankListItems[0] = blankListItem;
+                     //set list data
+                     setListData(blankListItems);
 
-            MyListItem[] listItems = new MyListItem[num_search_results];
+                }
+                //if recipes are found matching search
+                else {
+                    int num_search_results = recipeList.size();
 
-            int i = 0;
-            //for(int i=0;i<num_search_results;i++)
-            //had to iterate thru the parse object passed instead of incremental for loop
-            //i is still necessary for the array, though
-            for(ParseObject recipe : recipeList )
-            {
-                MyListItem listItem = new MyListItem();
-                listItem.setTitle(String.format("%s", recipe.get("Name")));
-                listItem.setObjectId(String.format("Object ID %s", recipe.getObjectId()));
-                listItems[i] = listItem;
-                i++;
-            }
+                    MyListItem[] listItems = new MyListItem[num_search_results];
 
-            //set list data
-            setListData(listItems);
+                    int i = 0;
 
+                    for(ParseObject recipe : recipeList ) {
+                        MyListItem listItem = new MyListItem();
+                        listItem.setTitle(String.format("%s", recipe.get("Name")));
+                        listItem.setObjectId(String.format("Object ID %s", recipe.getObjectId()));
+                        listItems[i] = listItem;
+                        i++;
+                    }
+
+                    //set list data
+                    setListData(listItems);
+                }
             }
         });
     }
