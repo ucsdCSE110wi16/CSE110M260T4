@@ -41,21 +41,6 @@ public class MainActivity extends AppCompatActivity {
             Parse.initialize(this);
 
             //////////////////Start Parse stuff to move/////////////////
-            String searchQuery = "mac";
-
-            ParseQuery<ParseObject> query = ParseQuery.getQuery("Recipe");
-            query.whereContains("Name", searchQuery);
-
-            query.findInBackground(new FindCallback<ParseObject>() {
-                public void done(List<ParseObject> Recipe, ParseException e) {
-                    if (e == null) {
-                        Log.d("mac n cheese", "Retrieved " + Recipe.toString() + " mac n cheese index");
-                    } else {
-                        Log.d("mac n cheese", "Error: " + e.getMessage());
-                    }
-                }
-            })
-            ;
             /////////////////End Parse stuff to move/////////////
 
             MainFragment mainFragment = new MainFragment();
@@ -103,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 String selectedRecipeTitle = intent.getStringExtra(RecipeSearchActivity.RECIPE_TITLE);
                 String selectedRecipeObjectId = intent.getStringExtra(RecipeSearchActivity.RECIPE_OBJECT_ID);
 
-                Toast.makeText(this, selectedRecipeTitle + " selected - " + selectedRecipeObjectId, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, selectedRecipeTitle, Toast.LENGTH_LONG).show();
                 //set the values of the current selected items
                 this.curSelectedRecipeName = selectedRecipeTitle;
                 this.curSelectedObjectId = selectedRecipeObjectId;
