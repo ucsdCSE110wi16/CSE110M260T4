@@ -14,6 +14,7 @@ import android.view.ViewGroup;
  */
 public class IngredientSearchViewFragment extends Fragment  implements View.OnClickListener {
 
+    public final static String INGREDIENTS_SEARCHED = "com.ucsd.cse110.recipeforsuccess.INGREDIENTS_SEARCHED";
 
     public IngredientSearchViewFragment() {
         // Required empty public constructor

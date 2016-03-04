@@ -11,7 +11,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 import android.widget.Button;
 import android.util.DisplayMetrics;
 
@@ -59,8 +58,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // so we can get the button to share half the screen
         DisplayMetrics displaymetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-        int width = displaymetrics.widthPixels - 40;
-        int buttonWidth = width/2;
+        int width = displaymetrics.widthPixels;
+        int buttonWidth = width/2 + 10;
 
         //Setup the ingredient button
         byIngredientButton = (Button) findViewById(R.id.byIngredientButton);
@@ -140,7 +139,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String selectedRecipeTitle = intent.getStringExtra(RecipeSearchActivity.RECIPE_TITLE);
                 String selectedRecipeObjectId = intent.getStringExtra(RecipeSearchActivity.RECIPE_OBJECT_ID);
 
-                Toast.makeText(this, selectedRecipeTitle, Toast.LENGTH_LONG).show();
                 //set the values of the current selected items
                 this.curSelectedRecipeName = selectedRecipeTitle;
                 this.curSelectedObjectId = selectedRecipeObjectId;
@@ -153,13 +151,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, fragment)
                         .commit();
-            } //Launch the search activity passing it the search term.
+            }
+            // This catches the return from the recipe name search view,
+            // then launches the search activity passing it the search term.
             else if( extras.containsKey(MainFragment.SEARCH_TERM) ) {
 
                 String queryString = intent.getStringExtra(MainFragment.SEARCH_TERM);
                 queryString = queryString.toLowerCase();
-                //should probably add something here that will catch an empty search
-                Toast.makeText(this, queryString + " searched", Toast.LENGTH_LONG).show();
 
                 //hide the buttons
                 hideButtons(false);
@@ -169,6 +167,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 new_intent.putExtra(SearchManager.QUERY, queryString);
                 startActivity(new_intent);
             }
+            // This catches the return from the ingredients search view,
+            // then launches the search activity passing it the searched ingredients
+            else if( extras.containsKey(IngredientSearchViewFragment.INGREDIENTS_SEARCHED) ) {
+
+                String[] queryIngredients = intent.getStringArrayExtra(IngredientSearchViewFragment.INGREDIENTS_SEARCHED);
+
+                //lower case all the ingredients
+                for (int i=0; i<queryIngredients.length ; i++ ) {
+                    queryIngredients[i] = queryIngredients[i].toLowerCase();
+                }
+                //hide the buttons
+                hideButtons(false);
+
+                //launch the recipe search list with the ingredients list to search for
+                Intent new_intent = new Intent(MainActivity.this, RecipeSearchActivity.class);
+                new_intent.setAction(Intent.ACTION_SEARCH);
+                new_intent.putExtra(RecipeDetailViewFragment.INGREDIENTS_QUERY, queryIngredients);
+                startActivity(new_intent);
+            }
+        }
+        else if(RecipeSearchActivity.ACTION_NO_RESULTS.equals(intent.getAction())) {
+            //launch the recipe search list with the ingredients list to search for
+            //Search button clicked display searching fragment view
+            NotFoundFragment notFoundFragment = new NotFoundFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, notFoundFragment)
+                    .commit();
+
+            byRecipeButton.setEnabled(true);
+            byIngredientButton.setEnabled(true);
         }
     }
 
