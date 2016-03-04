@@ -2,25 +2,30 @@ package com.ucsd.cse110.recipeforsuccess;
 
 import android.app.ListActivity;
 import android.app.SearchManager;
-import android.os.Bundle;
-import android.view.View;
 import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.parse.FindCallback;
+import com.parse.ParseException;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+
 import java.util.List;
-import com.parse.ParseException;
-import com.parse.*;
-import android.util.Log;
+
 
 public class RecipeSearchActivity extends ListActivity {
 
     public final static String RECIPE_TITLE = "com.ucsd.cse110.recipeforsuccess.RECIPE_TITLE";
     public final static String RECIPE_OBJECT_ID = "com.ucsd.cse110.recipeforsuccess.RECIPE_OBJECT_ID";
+
+    public final static String ACTION_NO_RESULTS = "com.ucsd.cse110.recipeforsuccess.ACTION_NO_RESULTS";
     //public final  View v;
 
     /**
@@ -123,6 +128,13 @@ public class RecipeSearchActivity extends ListActivity {
         startActivity(intent);
     }
 
+    private void handleNoResultsFound(){
+
+        Intent intent = new Intent(this,MainActivity.class);
+        intent.setAction(ACTION_NO_RESULTS);
+        startActivity(intent);
+    }
+
     private void doMySearch(String query) {
 
         //query is the string that the user searched for
@@ -142,14 +154,7 @@ public class RecipeSearchActivity extends ListActivity {
 
                 //if no recipes are found matching search
                 if (recipeList.size() == 0) {
-                     //TextView recipeRateBar = (TextView) v.findViewById(R.id.textView);
-                     MyListItem[] blankListItems = new MyListItem[1];
-                     MyListItem blankListItem = new MyListItem();
-                     blankListItem.setTitle("Sorry There Were No Recipes Found Matching Your Search");
-                     blankListItems[0] = blankListItem;
-                     //set list data
-                     setListData(blankListItems);
-
+                    handleNoResultsFound();
                 }
                 //if recipes are found matching search
                 else {
@@ -173,4 +178,5 @@ public class RecipeSearchActivity extends ListActivity {
             }
         });
     }
+
 }

@@ -45,7 +45,6 @@ public class SearchByTitleScenario {
 
     public static final String STRING_TO_BE_TYPED = "mac n cheese";
     public static final String RECIPE_TITLE = "mac n cheese";
-    public static final String STRING_TO_BE_TYPED2 = "chicken";
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
@@ -72,13 +71,8 @@ public class SearchByTitleScenario {
                 .check(matches(withText(RECIPE_TITLE)));
 
         // perform top-level user actions
-        pressBack();
-        pressBack();
+        //pressBack();
 
-        //  Click the search edit box and then type text
-        onView(withId(R.id.search))
-                .perform(click())
-                .perform(typeText(STRING_TO_BE_TYPED2), closeSoftKeyboard());
 
 
     }
