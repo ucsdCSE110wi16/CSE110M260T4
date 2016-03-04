@@ -18,7 +18,8 @@
             android:name="com.parse.CLIENT_KEY"
             android:value="v96Qbz21ekS7ARXjVxN0iZIoWnWl5n0RauROEFwc" />
 
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,8 +31,7 @@
         </activity>
 
         <activity
-            android:name=".RecipeSearchActivity"
-            android:launchMode="singleTop" >
+            android:name=".RecipeSearchActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>

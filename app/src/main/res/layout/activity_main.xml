@@ -9,11 +9,29 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.ucsd.cse110.recipeforsuccess.MainActivity">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search By Recipe"
+        android:id="@+id/byRecipeButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search By Ingredient"
+        android:id="@+id/byIngredientButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"  />
+
     <LinearLayout
         android:id="@+id/fragment_container"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_below="@+id/byIngredientButton"
         />
 
     <ImageView

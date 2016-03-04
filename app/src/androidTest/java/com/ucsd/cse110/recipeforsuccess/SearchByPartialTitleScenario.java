@@ -41,11 +41,11 @@ import android.support.test.espresso.Espresso;
  */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class SearchByTitleScenario {
+public class SearchByPartialTitleScenario {
 
-    public static final String STRING_TO_BE_TYPED = "mac n cheese";
-    public static final String RECIPE_TITLE = "mac n cheese";
-    public static final String STRING_TO_BE_TYPED2 = "chicken";
+
+    public static final String RECIPE_TITLE = "chicken kebabs";
+    public static final String STRING_TO_BE_TYPED = "chicken";
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
@@ -62,23 +62,14 @@ public class SearchByTitleScenario {
         onView(withId(R.id.button))
                 .perform(click());
 
-        //Click the first item
-        onData(allOf(is(instanceOf(RecipeSearchActivity.MyListItem.class)), is(hasToString("mac n cheese"))))
+        //Click the item we are looking for
+        onData(allOf(is(instanceOf(RecipeSearchActivity.MyListItem.class)), is(hasToString("chicken kebabs"))))
                 .perform(click());
 
 
         //Confirm we got the recipe detail page
         onView(withId(R.id.recipeTitle))
                 .check(matches(withText(RECIPE_TITLE)));
-
-        // perform top-level user actions
-        pressBack();
-        pressBack();
-
-        //  Click the search edit box and then type text
-        onView(withId(R.id.search))
-                .perform(click())
-                .perform(typeText(STRING_TO_BE_TYPED2), closeSoftKeyboard());
 
 
     }

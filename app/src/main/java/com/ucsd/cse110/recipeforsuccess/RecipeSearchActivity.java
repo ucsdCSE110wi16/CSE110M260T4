@@ -21,27 +21,60 @@ public class RecipeSearchActivity extends ListActivity {
 
     public final static String RECIPE_TITLE = "com.ucsd.cse110.recipeforsuccess.RECIPE_TITLE";
     public final static String RECIPE_OBJECT_ID = "com.ucsd.cse110.recipeforsuccess.RECIPE_OBJECT_ID";
+<<<<<<< HEAD
     //public final  View v;
+=======
+
+    /**
+     * This is an adapter for the search results received from Parse
+     * so that it can be displayed in the ListActivity.
+     */
+>>>>>>> 6b42708ceb231a67543693e6cf7d301037f5ea46
     public class MyListItem {
         private String recipeTitle;
         private String objectID;
 
+        /**
+         * Setter
+         *
+         * @param title title (will be what is displaed in the list
+         */
         public void setTitle(String title) {
             this.recipeTitle = title;
         }
 
+        /**
+         * Setter
+         *
+         * @param id - object ID retreived from parse.
+         */
         public void setObjectId(String id){
             this.objectID = id;
         }
 
+        /**
+         * Getter
+         *
+         * @return - Title of the recipe
+         */
         public String getTitle() {
             return this.recipeTitle;
         }
 
+        /**
+         * Getter
+         *
+         * @return object ID from parse
+         */
         public String getObjectID() {
             return this.objectID;
         }
 
+        /**
+         * Called by the list to get what to be displayed
+         *
+         * @return Name of the recipe
+         */
         @Override
         public String toString() {
             return this.recipeTitle;
