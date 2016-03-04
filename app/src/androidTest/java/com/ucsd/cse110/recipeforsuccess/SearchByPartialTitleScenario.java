@@ -62,7 +62,7 @@ public class SearchByPartialTitleScenario {
         onView(withId(R.id.button))
                 .perform(click());
 
-        //Click the first item
+        //Click the item we are looking for
         onData(allOf(is(instanceOf(RecipeSearchActivity.MyListItem.class)), is(hasToString("chicken kebabs"))))
                 .perform(click());
 
