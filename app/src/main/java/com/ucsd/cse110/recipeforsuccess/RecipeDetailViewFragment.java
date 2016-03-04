@@ -25,6 +25,19 @@ import android.widget.ImageView;
 import java.net.URL;
 import java.net.HttpURLConnection;
 import java.io.InputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.view.Menu;
+import android.widget.ImageView;
+
+
 
 import android.widget.Button;
 import android.widget.Toast;
@@ -34,12 +47,9 @@ import android.widget.Toast;
  */
 public class RecipeDetailViewFragment extends Fragment {
 
-    //variables for rating bar
 
-
-    //variables for image
-    private ImageView iv;
-    private Bitmap bitmap;
+    private ImageView iv;  //variable for image
+    //private ParseObject recipe;
 
     String objectID = null;
     String recipeName = null;
@@ -70,27 +80,51 @@ public class RecipeDetailViewFragment extends Fragment {
         return v;
     }
 
+    //used in get recipe details; runs a second tread to load the image with url
 
+    public class LoadImageFromURL extends AsyncTask<String, Void, Bitmap> {
 
+        @Override
+        protected Bitmap doInBackground(String... src) {
+            // TODO Auto-generated method stub
 
-    //function that gets image from url
-    public Bitmap getBitmapFromURL(String src) {
-        try {
-            URL url = new URL(src);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
+            try {
+                URL url = new URL(src[0]);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                Bitmap myBitmap = BitmapFactory.decodeStream(input);
+                return myBitmap;
+
+            } catch (MalformedURLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                return null;
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                return null;
+            }
+
 
         }
-        catch (Exception e) {
-            e.printStackTrace();
-            return null;
 
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            // TODO Auto-generated method stub
+            super.onPostExecute(result);
+            //check if ImageView is null before setting incase user has left page
+            if (iv == null) {
+                return;
+            }
+            else {
+                iv.setImageBitmap(result);
+            }
         }
+
     }
+
 
     //this is the function to get all the details to populate this view
     void getRecipeDetails(final View v){
@@ -137,13 +171,11 @@ public class RecipeDetailViewFragment extends Fragment {
                     recipeDirectionBox.setTypeface(typeFace4);
                     recipeDirectionBox.setText(recipe.get("Directions").toString());
 
-                    //commented out currently using a place holder
-                    // getting recipe instructions and changing font
-                    //TextView recipeImageBox = (TextView) v.findViewById(R.id.recipeDetails);
-                    //String url = recipe.get("img").toString();
-                    //iv = (ImageView) v.findViewById(R.id.imageView2);
-                    //bitmap = getBitmapFromURL(url);
-                    //iv.setImageBitmap(bitmap);
+                   //getting recipe image url and loading the image with url
+                    String url = recipe.get("img").toString();
+                    iv = (ImageView) v.findViewById(R.id.imageView2);
+                    LoadImageFromURL loadImage = new LoadImageFromURL();
+                    loadImage.execute(url);
 
                     // getting recipe rating
                     RatingBar recipeRateBar = (RatingBar) v.findViewById(R.id.ratingBar);

@@ -16,4 +16,12 @@
         android:orientation="vertical"
         />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView3"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/fragment_container"
+        android:layout_alignEnd="@+id/fragment_container" />
+
 </RelativeLayout>
