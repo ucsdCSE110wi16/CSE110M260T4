@@ -71,7 +71,7 @@ public class IngredientSearchViewFragment extends Fragment  implements View.OnCl
         Intent intent = new Intent(getActivity(), MainActivity.class);
         intent.setAction(Intent.ACTION_VIEW);
         String query = mSearchingIngredients.getText().toString();
-        String[] ingredients = query.split(",");
+        String[] ingredients = query.split(", ");
         intent.putExtra(MainActivity.INGREDIENTS_SEARCHED, ingredients);
         startActivity(intent);
     }

@@ -128,11 +128,11 @@ public class RecipeSearchActivity extends ListActivity {
                 String [] ingredients = intent.getStringArrayExtra(MainActivity.INGREDIENTS_SEARCHED);
 
                 //just doing a toast here to confirm string of ingredients was passed.
-                String ingredients_str = "";
-                for(String ingredient : ingredients)
-                    ingredients_str += ingredient;
+                //String ingredients_str = "";
+                //for(String ingredient : ingredients)
+                //    ingredients_str += ingredient;
 
-                Toast.makeText(getApplicationContext(), ingredients_str, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), ingredients_str, Toast.LENGTH_LONG).show();
 
                 doIngSearch(ingredients);
             }
@@ -208,16 +208,20 @@ public class RecipeSearchActivity extends ListActivity {
 
         //query is the string that the user searched for
         //Toast.makeText(this, query + " has been passed to the search results", Toast.LENGTH_LONG).show();
-        String [] ingID;
+        ArrayList<String> ingNames = new ArrayList<String>();
+
+        for (int x = 0; x<ingredients.length; x++) {
+           Log.d("ingredients", "Added " + ingredients[x] + " to ingredients");
+           ingNames.add(ingredients[x]);
+        }
 
 
         ParseQuery<ParseObject> ingSearch = ParseQuery.getQuery("Ingredients");
-        ingSearch.whereContainedIn("Name", Arrays.asList(ingredients));
-        ingSearch.orderByAscending("Name");
+        ingSearch.whereContainedIn("Name", ingNames);
         ingSearch.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> ingList, ParseException e) {
                 if (e == null) {
-                    Log.d("ingredients", "Retrieved " + ingList.size() + "ingredients");
+                    Log.d("ingredients", "Retrieved " + ingList.size() + " ingredients");
                 } else {
                     Log.d("ingredients", "Error: " + e.getMessage());
                 }
@@ -230,10 +234,11 @@ public class RecipeSearchActivity extends ListActivity {
                 //if recipes are found matching search
                 else {
 
-                    ArrayList<String> ingID = new ArrayList<String>();
+                    ArrayList<String> ingID = new ArrayList<>();
 
                     for (ParseObject ingredient : ingList) {
-                        ingID.add((String) ingredient.get("objectId"));
+                        ingID.add(ingredient.getObjectId());
+                        Log.d("ingredients", "object " + ingredient.getObjectId() + " added to ID list");
                     }
 
                     ParseQuery<ParseObject> recSearch = ParseQuery.getQuery("Recipe");
@@ -242,9 +247,9 @@ public class RecipeSearchActivity extends ListActivity {
                     recSearch.findInBackground(new FindCallback<ParseObject>() {
                         public void done(List<ParseObject> recipeList, ParseException e) {
                             if (e == null) {
-                                Log.d("recipe", "Retrieved " + recipeList.size() + "recipes");
+                                Log.d("ingredients", "Retrieved " + recipeList.size() + " recipes");
                             } else {
-                                Log.d("recipe", "Error: " + e.getMessage());
+                                Log.d("ingredients", "Error: " + e.getMessage());
                             }
 
 
