@@ -36,10 +36,21 @@ public class NoMatchesFound {
                 .perform(click())
                 .perform(typeText(STRING_TO_BE_TYPED), closeSoftKeyboard());
 
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         // Click the search button
         onView(withId(R.id.button))
                 .perform(click());
-
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         //Confirm that the recipe isn't found
         onView(withId(R.id.recipeTitle))
                 .check(matches(withText(RECIPE_TITLE)));

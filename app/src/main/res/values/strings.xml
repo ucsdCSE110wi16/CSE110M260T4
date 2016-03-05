@@ -12,4 +12,5 @@
     <string name="recipe_details">recipe_details</string>
     <string name="recipe_ingredients">Recipe ingredients placeholder</string>
     <string name="string">recipeImage</string>
+    <string name="searchingIngredients">Ingredients_placeholder</string>
 </resources>
