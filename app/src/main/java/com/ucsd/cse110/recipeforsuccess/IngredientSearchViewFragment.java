@@ -36,7 +36,7 @@ public class IngredientSearchViewFragment extends Fragment  implements View.OnCl
         mSearchingIngredients = (TextView) v.findViewById(R.id.searchingIngredients);
         mSearchTerm = (EditText) v.findViewById(R.id.editText);
         mSearchButton = (Button) v.findViewById(R.id.button);
-        mAddButton = (Button) v.findViewById(R.id.button2);
+        mAddButton = (Button) v.findViewById(R.id.addIngredient);
 
         mSearchButton.setOnClickListener(this);
         mAddButton.setOnClickListener(this);
@@ -80,7 +80,7 @@ public class IngredientSearchViewFragment extends Fragment  implements View.OnCl
     public void onClick(View view) {
         switch (view.getId()) {
             //add selected
-            case R.id.button2:
+            case R.id.addIngredient:
                 handleAddPressed();
                 break;
 
