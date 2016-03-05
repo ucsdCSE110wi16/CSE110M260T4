@@ -51,7 +51,7 @@ public class SearchByTitleScenario {
             MainActivity.class);
 
     @Test
-    public void searchByKeyword() {
+    public void searchByKeyword() throws InterruptedException{
         // Click the search edit box and then type text
         onView(withId(R.id.editText))
                 .perform(click())
@@ -60,6 +60,7 @@ public class SearchByTitleScenario {
         // Click the search button
         onView(withId(R.id.button))
                 .perform(click());
+        Thread.sleep(3000);
 
         //Click the first item
         onData(allOf(is(instanceOf(RecipeSearchActivity.MyListItem.class)), is(hasToString("mac n cheese"))))

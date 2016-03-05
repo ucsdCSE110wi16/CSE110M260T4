@@ -18,8 +18,6 @@ public class MainFragment extends Fragment implements OnClickListener{
 
     Button mSearchButton;
     EditText mSearchTerm;
-    public final static String SEARCH_TERM = "com.ucsd.cse110.recipeforsuccess.SEARCH_TERM";
-
 
     public MainFragment() {
         // Required empty public constructor
@@ -55,7 +53,7 @@ public class MainFragment extends Fragment implements OnClickListener{
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 intent.setAction(Intent.ACTION_VIEW);
                 String query = mSearchTerm.getText().toString();
-                intent.putExtra(SEARCH_TERM, query);
+                intent.putExtra(MainActivity.SEARCH_TERM, query);
                 startActivity(intent);
                 break;
 

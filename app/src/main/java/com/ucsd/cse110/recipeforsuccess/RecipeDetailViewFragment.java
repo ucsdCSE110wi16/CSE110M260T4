@@ -47,8 +47,6 @@ import android.widget.Toast;
  */
 public class RecipeDetailViewFragment extends Fragment {
 
-    public final static String INGREDIENTS_QUERY = "com.ucsd.cse110.recipeforsuccess.INGREDIENTS_QUERY";
-
     private ImageView iv;  //variable for image
     //private ParseObject recipe;
 

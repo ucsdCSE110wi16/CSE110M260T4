@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.util.DisplayMetrics;
+import android.graphics.Color;
 
 import com.parse.Parse;
 
@@ -25,11 +26,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button byIngredientButton;
     Button byRecipeButton;
 
+    public final static String INGREDIENTS_SEARCHED = "com.ucsd.cse110.recipeforsuccess.INGREDIENTS_SEARCHED";
+    public final static String SEARCH_TERM = "com.ucsd.cse110.recipeforsuccess.SEARCH_TERM";
+    public final static String RECIPE_TITLE = "com.ucsd.cse110.recipeforsuccess.RECIPE_TITLE";
+    public final static String RECIPE_OBJECT_ID = "com.ucsd.cse110.recipeforsuccess.RECIPE_OBJECT_ID";
+    public final static String ACTION_NO_RESULTS = "com.ucsd.cse110.recipeforsuccess.ACTION_NO_RESULTS";
+
     @Override
     // This can be used for loading our database
     protected void onCreate(Bundle savedInstanceState/*, ParseObject objectName*/) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //getWindow().getDecorView().setBackgroundColor(Color.parseColor("#FFAAEFDF"));
+        //getWindow().getDecorView().setBackgroundColor(Color.WHITE);
 
         if (!bParseInitialized) {
 
@@ -134,10 +143,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Bundle extras = intent.getExtras();
 
             //Catch the return from the search activity and launch recipe details
-            if( extras.containsKey(RecipeSearchActivity.RECIPE_TITLE)  ) {
+            if( extras.containsKey(RECIPE_TITLE)  ) {
 
-                String selectedRecipeTitle = intent.getStringExtra(RecipeSearchActivity.RECIPE_TITLE);
-                String selectedRecipeObjectId = intent.getStringExtra(RecipeSearchActivity.RECIPE_OBJECT_ID);
+                String selectedRecipeTitle = intent.getStringExtra(RECIPE_TITLE);
+                String selectedRecipeObjectId = intent.getStringExtra(RECIPE_OBJECT_ID);
 
                 //set the values of the current selected items
                 this.curSelectedRecipeName = selectedRecipeTitle;
@@ -154,9 +163,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             // This catches the return from the recipe name search view,
             // then launches the search activity passing it the search term.
-            else if( extras.containsKey(MainFragment.SEARCH_TERM) ) {
+            else if( extras.containsKey(SEARCH_TERM) ) {
 
-                String queryString = intent.getStringExtra(MainFragment.SEARCH_TERM);
+                String queryString = intent.getStringExtra(SEARCH_TERM);
                 queryString = queryString.toLowerCase();
 
                 //hide the buttons
@@ -169,9 +178,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             // This catches the return from the ingredients search view,
             // then launches the search activity passing it the searched ingredients
-            else if( extras.containsKey(IngredientSearchViewFragment.INGREDIENTS_SEARCHED) ) {
+            else if( extras.containsKey(INGREDIENTS_SEARCHED) ) {
 
-                String[] queryIngredients = intent.getStringArrayExtra(IngredientSearchViewFragment.INGREDIENTS_SEARCHED);
+                String[] queryIngredients = intent.getStringArrayExtra(INGREDIENTS_SEARCHED);
 
                 //lower case all the ingredients
                 for (int i=0; i<queryIngredients.length ; i++ ) {
@@ -183,11 +192,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //launch the recipe search list with the ingredients list to search for
                 Intent new_intent = new Intent(MainActivity.this, RecipeSearchActivity.class);
                 new_intent.setAction(Intent.ACTION_SEARCH);
-                new_intent.putExtra(RecipeDetailViewFragment.INGREDIENTS_QUERY, queryIngredients);
+                new_intent.putExtra(INGREDIENTS_SEARCHED, queryIngredients);
                 startActivity(new_intent);
             }
         }
-        else if(RecipeSearchActivity.ACTION_NO_RESULTS.equals(intent.getAction())) {
+        else if(ACTION_NO_RESULTS.equals(intent.getAction())) {
             //launch the recipe search list with the ingredients list to search for
             //Search button clicked display searching fragment view
             NotFoundFragment notFoundFragment = new NotFoundFragment();

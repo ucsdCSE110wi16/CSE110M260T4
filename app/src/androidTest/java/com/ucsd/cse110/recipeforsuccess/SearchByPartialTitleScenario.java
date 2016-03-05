@@ -53,7 +53,7 @@ public class SearchByPartialTitleScenario {
             MainActivity.class);
 
     @Test
-    public void searchByKeyword() {
+    public void searchByKeyword() throws InterruptedException{
         // Click the search edit box and then type text
         onView(withId(R.id.editText))
                 .perform(click())
@@ -64,6 +64,8 @@ public class SearchByPartialTitleScenario {
         // Click the search button
         onView(withId(R.id.button))
                 .perform(click());
+
+        Thread.sleep(3000);
 
         //Click the item we are looking for
         onData(allOf(is(instanceOf(RecipeSearchActivity.MyListItem.class)), is(hasToString("chicken kebabs"))))
