@@ -22,10 +22,6 @@ import java.util.List;
 
 public class RecipeSearchActivity extends ListActivity {
 
-    public final static String RECIPE_TITLE = "com.ucsd.cse110.recipeforsuccess.RECIPE_TITLE";
-    public final static String RECIPE_OBJECT_ID = "com.ucsd.cse110.recipeforsuccess.RECIPE_OBJECT_ID";
-
-    public final static String ACTION_NO_RESULTS = "com.ucsd.cse110.recipeforsuccess.ACTION_NO_RESULTS";
     //public final  View v;
 
     /**
@@ -107,10 +103,35 @@ public class RecipeSearchActivity extends ListActivity {
         handleIntent(intent);
     }
 
+    /**
+     * Handles the intent of the starting of this activity.  Will be launched with either
+     * a recipe title search or ingredient search.
+     */
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            doMySearch(query);
+
+            Bundle extras = intent.getExtras();
+
+            if( extras.containsKey(SearchManager.QUERY)  ) {
+                /**
+                 * this is the result of search by recipe name
+                 */
+                String query = intent.getStringExtra(SearchManager.QUERY);
+                doMySearch(query);
+            }
+            else if (extras.containsKey(MainActivity.INGREDIENTS_SEARCHED)  ) {
+                /**
+                 * this is the result of search by ingredients
+                 */
+                String [] ingredients = intent.getStringArrayExtra(MainActivity.INGREDIENTS_SEARCHED);
+
+                //just doing a toast here to confirm string of ingredients was passed.
+                String ingredients_str = "";
+                for(String ingredient : ingredients)
+                    ingredients_str += ingredient;
+
+                Toast.makeText(getApplicationContext(), ingredients_str, Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -121,17 +142,17 @@ public class RecipeSearchActivity extends ListActivity {
 
         Intent intent = new Intent(this,MainActivity.class);
         intent.setAction(Intent.ACTION_VIEW);
-        intent.putExtra(RECIPE_TITLE, item.getTitle());
+        intent.putExtra(MainActivity.RECIPE_TITLE, item.getTitle());
 
         //should this be here?
-        intent.putExtra(RECIPE_OBJECT_ID, item.getObjectID());
+        intent.putExtra(MainActivity.RECIPE_OBJECT_ID, item.getObjectID());
         startActivity(intent);
     }
 
     private void handleNoResultsFound(){
 
         Intent intent = new Intent(this,MainActivity.class);
-        intent.setAction(ACTION_NO_RESULTS);
+        intent.setAction(MainActivity.ACTION_NO_RESULTS);
         startActivity(intent);
     }
 
