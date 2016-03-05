@@ -80,7 +80,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add"
-        android:id="@+id/button2"
+        android:id="@+id/addIngredient"
         android:layout_alignTop="@+id/editText"
         android:layout_alignBottom="@+id/editText"
         android:layout_alignRight="@+id/recipe_search_container"
