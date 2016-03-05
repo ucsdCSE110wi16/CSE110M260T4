@@ -47,18 +47,18 @@
         android:hint=" Enter name of ingredient"
         android:background="#d9d9d9"
         android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"
         android:layout_marginBottom="30px" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/textViewIngredients"
+        android:text="@string/searchingIngredients"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/editText"
-        android:layout_alignStart="@+id/editText" />
+        android:layout_alignStart="@+id/editText"
+        android:id="@+id/searchingIngredients"
+        android:longClickable="false" />
 
 
     <Button
@@ -79,13 +79,20 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="Add"
         android:id="@+id/button2"
         android:layout_alignTop="@+id/editText"
-        android:layout_toRightOf="@+id/editText"
         android:layout_alignBottom="@+id/editText"
         android:layout_alignRight="@+id/recipe_search_container"
-        android:layout_alignEnd="@+id/recipe_search_container" />
+        android:layout_alignEnd="@+id/recipe_search_container"
+        android:layout_toRightOf="@+id/editText"
+        android:layout_toEndOf="@+id/editText"
+        android:background="#063c69"
+        android:textColor="#ffffff"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_marginLeft="20px"
+        android:layout_margin="20px" />
 
 
 </RelativeLayout>
