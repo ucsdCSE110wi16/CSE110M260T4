@@ -17,6 +17,8 @@ import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -131,6 +133,8 @@ public class RecipeSearchActivity extends ListActivity {
                     ingredients_str += ingredient;
 
                 Toast.makeText(getApplicationContext(), ingredients_str, Toast.LENGTH_LONG).show();
+
+                doIngSearch(ingredients);
             }
         }
     }
@@ -185,7 +189,7 @@ public class RecipeSearchActivity extends ListActivity {
 
                     int i = 0;
 
-                    for(ParseObject recipe : recipeList ) {
+                    for (ParseObject recipe : recipeList) {
                         MyListItem listItem = new MyListItem();
                         listItem.setTitle(String.format("%s", recipe.get("Name")));
                         listItem.setObjectId(String.format("Object ID %s", recipe.getObjectId()));
@@ -195,6 +199,80 @@ public class RecipeSearchActivity extends ListActivity {
 
                     //set list data
                     setListData(listItems);
+                }
+            }
+        });
+    }
+
+    private void doIngSearch(String ingredients[]) {
+
+        //query is the string that the user searched for
+        //Toast.makeText(this, query + " has been passed to the search results", Toast.LENGTH_LONG).show();
+        String [] ingID;
+
+
+        ParseQuery<ParseObject> ingSearch = ParseQuery.getQuery("Ingredients");
+        ingSearch.whereContainedIn("Name", Arrays.asList(ingredients));
+        ingSearch.orderByAscending("Name");
+        ingSearch.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> ingList, ParseException e) {
+                if (e == null) {
+                    Log.d("ingredients", "Retrieved " + ingList.size() + "ingredients");
+                } else {
+                    Log.d("ingredients", "Error: " + e.getMessage());
+                }
+
+
+                //if no recipes are found matching search
+                if (ingList.size() == 0) {
+                    handleNoResultsFound();
+                }
+                //if recipes are found matching search
+                else {
+
+                    ArrayList<String> ingID = new ArrayList<String>();
+
+                    for (ParseObject ingredient : ingList) {
+                        ingID.add((String) ingredient.get("objectId"));
+                    }
+
+                    ParseQuery<ParseObject> recSearch = ParseQuery.getQuery("Recipe");
+                    recSearch.whereContainsAll("IngKeys", ingID);
+                    recSearch.orderByAscending("Name");
+                    recSearch.findInBackground(new FindCallback<ParseObject>() {
+                        public void done(List<ParseObject> recipeList, ParseException e) {
+                            if (e == null) {
+                                Log.d("recipe", "Retrieved " + recipeList.size() + "recipes");
+                            } else {
+                                Log.d("recipe", "Error: " + e.getMessage());
+                            }
+
+
+                            //if no recipes are found matching search
+                            if (recipeList.size() == 0) {
+                                handleNoResultsFound();
+                            }
+                            //if recipes are found matching search
+                            else {
+                                int num_search_results = recipeList.size();
+
+                                MyListItem[] listItems = new MyListItem[num_search_results];
+
+                                int i = 0;
+
+                                for (ParseObject recipe : recipeList) {
+                                    MyListItem listItem = new MyListItem();
+                                    listItem.setTitle(String.format("%s", recipe.get("Name")));
+                                    listItem.setObjectId(String.format("Object ID %s", recipe.getObjectId()));
+                                    listItems[i] = listItem;
+                                    i++;
+                                }
+
+                                //set list data
+                                setListData(listItems);
+                            }
+                        }
+                    });
                 }
             }
         });
