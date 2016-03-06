@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Search by Ingredients"
-        android:textSize="60px"
+        android:textSize="75px"
         android:id="@+id/textView2"
         android:textAlignment="center"
         android:layout_below="@+id/imageView"

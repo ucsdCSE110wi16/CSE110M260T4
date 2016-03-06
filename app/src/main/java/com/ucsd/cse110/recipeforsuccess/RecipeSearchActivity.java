@@ -3,6 +3,7 @@ package com.ucsd.cse110.recipeforsuccess;
 import android.app.ListActivity;
 import android.app.SearchManager;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;

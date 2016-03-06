@@ -2,6 +2,7 @@ package com.ucsd.cse110.recipeforsuccess;
 
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -32,6 +33,24 @@ public class IngredientSearchViewFragment extends Fragment  implements View.OnCl
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_ingredient_search_view, container, false);
+
+        // Changing font of title
+        TextView screenTitle = (TextView) v.findViewById(R.id.textView2);
+        Typeface typeFace = Typeface.createFromAsset(getContext().getAssets(), "Pacifico.ttf");
+        screenTitle.setTypeface(typeFace);
+
+        // Changing font of "Search" button
+        TextView buttonText = (TextView) v.findViewById(R.id.button);
+        Typeface typeFace2 = Typeface.createFromAsset(getContext().getAssets(), "Slabo13px-Regular.ttf");
+        buttonText.setTypeface(typeFace2);
+
+        // Changing font of "Add" button
+        TextView addIngredientText = (TextView) v.findViewById(R.id.addIngredient);
+        addIngredientText.setTypeface(typeFace2);
+
+        // Changing font of ingredients
+        TextView ingredientText = (TextView) v.findViewById(R.id.searchingIngredients);
+        ingredientText.setTypeface(typeFace2);
 
         mSearchingIngredients = (TextView) v.findViewById(R.id.searchingIngredients);
         mSearchTerm = (EditText) v.findViewById(R.id.editText);

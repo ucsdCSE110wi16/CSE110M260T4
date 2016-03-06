@@ -42,6 +42,16 @@ public class MainFragment extends Fragment implements OnClickListener{
 
             mSearchTerm = (EditText) v.findViewById(R.id.editText);
 
+            // Changing font of title
+            TextView screenTitle = (TextView) v.findViewById(R.id.textView2);
+            Typeface typeFace = Typeface.createFromAsset(getContext().getAssets(), "Pacifico.ttf");
+            screenTitle.setTypeface(typeFace);
+
+            // Changing font of button
+            TextView buttonText = (TextView) v.findViewById(R.id.button);
+            Typeface typeFace2 = Typeface.createFromAsset(getContext().getAssets(), "Slabo13px-Regular.ttf");
+            buttonText.setTypeface(typeFace2);
+
         }
         return v;
     }

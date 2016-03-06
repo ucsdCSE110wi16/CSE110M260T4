@@ -3,7 +3,9 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fillViewport="true"
-    android:id="@+id/scrollView">
+    android:id="@+id/scrollView"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
