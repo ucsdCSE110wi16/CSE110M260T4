@@ -10,23 +10,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Sorry we couldn&apos;t find what you were looking for"
+        android:text=""
         android:id="@+id/textView3"
         android:layout_gravity="center_horizontal|top"
         android:layout_marginTop="79dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginRight="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Please try searching for another recipe"
+        android:text=""
         android:id="@+id/textView4"
         android:layout_below="@+id/textView3"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp" />
