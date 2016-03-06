@@ -79,7 +79,7 @@ public class RecipeDetailViewFragment extends Fragment {
         return v;
     }
 
-    //used in get recipe details; runs a second tread to load the image with url
+        //used in get recipe details; runs a second tread to load the image with url
 
     public class LoadImageFromURL extends AsyncTask<String, Void, Bitmap> {
 
