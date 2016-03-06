@@ -91,12 +91,16 @@ public class RecipeSearchActivity extends ListActivity {
 
     private void setListData(MyListItem[] searchResults) {
 
-        ArrayAdapter<MyListItem> adapter=new
-                ArrayAdapter<MyListItem>(
-                this,
-                android.R.layout.simple_list_item_1,
-                searchResults);
-        setListAdapter(adapter);
+//        ArrayAdapter<MyListItem> adapter=new
+//                ArrayAdapter<MyListItem>(
+//                this,
+//                android.R.layout.simple_list_item_1,
+//                searchResults);
+//        setListAdapter(adapter);
+
+        // adapter for using custom font
+        ArrayAdapter<MyListItem> listAdapter = new CustomListAdapter(this, android.R.layout.simple_list_item_1, searchResults);
+        setListAdapter(listAdapter);
     }
 
     @Override

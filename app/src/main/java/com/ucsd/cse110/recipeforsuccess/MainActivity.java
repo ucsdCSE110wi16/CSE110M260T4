@@ -3,6 +3,7 @@ package com.ucsd.cse110.recipeforsuccess;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.util.DisplayMetrics;
 import android.graphics.Color;
+import android.widget.TextView;
 
 import com.parse.Parse;
 
@@ -72,11 +74,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //Setup the ingredient button
         byIngredientButton = (Button) findViewById(R.id.byIngredientButton);
+        TextView ingredientButtonText = (TextView) findViewById(R.id.byIngredientButton);
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "Slabo13px-Regular.ttf");
+        ingredientButtonText.setTypeface(typeface);
         byIngredientButton.setOnClickListener(this);
         byIngredientButton.setWidth(buttonWidth);
 
         //setup the recipe button
         byRecipeButton = (Button) findViewById(R.id.byRecipeButton);
+        TextView byRecipeButtonText = (TextView) findViewById(R.id.byRecipeButton);
+        byRecipeButtonText.setTypeface(typeface);
         byRecipeButton.setOnClickListener(this);
         byRecipeButton.setWidth(buttonWidth);
 
