@@ -160,14 +160,12 @@ public class RecipeDetailViewFragment extends Fragment {
 
                     // getting recipe ingredients and changing font
                     TextView recipeIngredientsBox = (TextView) v.findViewById(R.id.recipeIngredients);
-                    Typeface typeFace3 = Typeface.createFromAsset(getContext().getAssets(), "Slabo13px-Regular.ttf");
-                    recipeIngredientsBox.setTypeface(typeFace3);
+                    recipeIngredientsBox.setTypeface(typeFace2);
                     recipeIngredientsBox.setText(recipe.get("Ingredients").toString());
 
                     // getting recipe instructions and changing font
                     TextView recipeDirectionBox = (TextView) v.findViewById(R.id.recipeInstructions);
-                    Typeface typeFace4 = Typeface.createFromAsset(getContext().getAssets(), "Slabo13px-Regular.ttf");
-                    recipeDirectionBox.setTypeface(typeFace4);
+                    recipeDirectionBox.setTypeface(typeFace2);
                     recipeDirectionBox.setText(recipe.get("Directions").toString());
 
                    //getting recipe image url and loading the image with url
