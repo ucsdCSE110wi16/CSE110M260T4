@@ -65,7 +65,7 @@ public class SearchByIngredientsScenario {
         // Click the add button
         onView(withId(R.id.addIngredient))
                 .perform(click());
-        Thread.sleep(3000);
+        Thread.sleep(2000);
 
         // Click the search edit box and then type text
         onView(withId(R.id.editText))
@@ -75,12 +75,12 @@ public class SearchByIngredientsScenario {
         // Click the add button
         onView(withId(R.id.addIngredient))
                 .perform(click());
-        Thread.sleep(3000);
+        Thread.sleep(2000);
 
         // Click the search button
         onView(withId(R.id.button))
                 .perform(click());
-        Thread.sleep(3000);
+        Thread.sleep(2000);
 
         //Click the recipe we are looking for
         onData(allOf(is(instanceOf(RecipeSearchActivity.MyListItem.class)), is(hasToString("chili"))))
