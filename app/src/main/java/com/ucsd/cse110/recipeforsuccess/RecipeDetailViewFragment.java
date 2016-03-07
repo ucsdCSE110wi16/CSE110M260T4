@@ -1,6 +1,7 @@
 package com.ucsd.cse110.recipeforsuccess;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -55,7 +56,6 @@ public class RecipeDetailViewFragment extends Fragment {
     ParseObject parseObject = null;
 
     public RecipeDetailViewFragment() {
-        // Required empty public constructor
     }
 
     public static RecipeDetailViewFragment newInstance(String name) {
@@ -71,6 +71,9 @@ public class RecipeDetailViewFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_recipe_detail_view, container, false);
+
+        // Required empty public constructor
+        getActivity().getWindow().getDecorView().setBackgroundColor(Color.WHITE);
 
         getRecipeDetails(v);
         fillInViewContents(v);

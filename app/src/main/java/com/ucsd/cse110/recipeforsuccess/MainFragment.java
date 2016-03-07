@@ -2,6 +2,7 @@ package com.ucsd.cse110.recipeforsuccess;
 
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -31,6 +32,9 @@ public class MainFragment extends Fragment implements OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        getActivity().getWindow().getDecorView().setBackgroundColor(Color.parseColor("#FFAAEFDF"));
+
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_main, container, false);
         if (v != null) {

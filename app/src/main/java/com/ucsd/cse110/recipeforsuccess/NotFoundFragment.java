@@ -1,6 +1,7 @@
 package com.ucsd.cse110.recipeforsuccess;
 
 
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -28,6 +29,9 @@ public class NotFoundFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_not_found, container, false);
         setText(v);
+
+        // Required empty public constructor
+        getActivity().getWindow().getDecorView().setBackgroundColor(Color.WHITE);
 
         return v;
     }

@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState/*, ParseObject objectName*/) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //getWindow().getDecorView().setBackgroundColor(Color.parseColor("#FFAAEFDF"));
+
+        getWindow().getDecorView().setBackgroundColor(Color.parseColor("#FFAAEFDF"));
         //getWindow().getDecorView().setBackgroundColor(Color.WHITE);
 
         if (!bParseInitialized) {
@@ -110,6 +111,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * Method to bring in the recipe search into view
      */
     private void setRecipeSearchActive(){
+
+        getWindow().getDecorView().setBackgroundColor(Color.parseColor("#FFAAEFDF"));
+
         MainFragment mainFragment = new MainFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, mainFragment)
@@ -120,6 +124,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * Method to bring in the ingredient search into view
      */
     private void setIngredientSearchActive(){
+
+        getWindow().getDecorView().setBackgroundColor(Color.parseColor("#FFAAEFDF"));
+
         IngredientSearchViewFragment fragment = new IngredientSearchViewFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, fragment)
@@ -162,6 +169,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //hide the buttons
                 hideButtons(true);
 
+                getWindow().getDecorView().setBackgroundColor(Color.WHITE);
+
                 //Start the detail recipe view fragment
                 RecipeDetailViewFragment fragment = new RecipeDetailViewFragment();
                 getSupportFragmentManager().beginTransaction()
@@ -177,6 +186,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 //hide the buttons
                 hideButtons(false);
+
+                getWindow().getDecorView().setBackgroundColor(Color.WHITE);
 
                 Intent new_intent = new Intent(MainActivity.this, RecipeSearchActivity.class);
                 new_intent.setAction(Intent.ACTION_SEARCH);
@@ -196,6 +207,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //hide the buttons
                 hideButtons(false);
 
+                getWindow().getDecorView().setBackgroundColor(Color.WHITE);
+
                 //launch the recipe search list with the ingredients list to search for
                 Intent new_intent = new Intent(MainActivity.this, RecipeSearchActivity.class);
                 new_intent.setAction(Intent.ACTION_SEARCH);
@@ -204,6 +217,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         else if(ACTION_NO_RESULTS.equals(intent.getAction())) {
+
+            getWindow().getDecorView().setBackgroundColor(Color.WHITE);
+
             //launch the recipe search list with the ingredients list to search for
             //Search button clicked display searching fragment view
             NotFoundFragment notFoundFragment = new NotFoundFragment();
@@ -227,6 +243,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
+
+                getWindow().getDecorView().setBackgroundColor(Color.WHITE);
+
                 //Search button clicked display searching fragment view
                 SearchingViewFragment searchingFragment = new SearchingViewFragment();
                 getSupportFragmentManager().beginTransaction()
@@ -239,6 +258,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public boolean onMenuItemActionCollapse(MenuItem item) {
                 // Do whatever you need
                 getSupportFragmentManager().popBackStack();
+
+                getWindow().getDecorView().setBackgroundColor(Color.parseColor("#FFAAEFDF"));
 
                 MainFragment mainFragment = new MainFragment();
                 getSupportFragmentManager().beginTransaction()
