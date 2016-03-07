@@ -80,12 +80,13 @@ public class SearchByIngredientsScenario {
         // Click the search button
         onView(withId(R.id.button))
                 .perform(click());
-        Thread.sleep(2000);
+
+        Thread.sleep(3000);
 
         //Click the recipe we are looking for
         onData(allOf(is(instanceOf(RecipeSearchActivity.MyListItem.class)), is(hasToString("chili"))))
                 .perform(click());
-
+        Thread.sleep(3000);
 
         //Confirm we got the recipe detail page
         onView(withId(R.id.recipeTitle))
