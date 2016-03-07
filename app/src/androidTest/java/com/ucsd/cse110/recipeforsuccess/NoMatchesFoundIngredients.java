@@ -13,19 +13,12 @@ import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.hasToString;
-import static org.hamcrest.Matchers.instanceOf;
-import static org.hamcrest.Matchers.is;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 
 /**
  *
  */
-public class NoMatchesFound {
-    public static final String RECIPE_TITLE = "Sorry There Were No Recipes Found Matching Your Search";
-    public static final String STRING_TO_BE_TYPED = "cupcake";
+public class NoMatchesFoundIngredients {
+    public static final String STRING_TO_BE_TYPED = "celery";
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
@@ -33,6 +26,10 @@ public class NoMatchesFound {
 
     @Test
     public void searchByKeyword() {
+        // Click on the "Search by Ingredients" button
+        onView(withId(R.id.byIngredientButton))
+                .perform(click());
+
         // Click the search edit box and then type text
         onView(withId(R.id.editText))
                 .perform(click())
