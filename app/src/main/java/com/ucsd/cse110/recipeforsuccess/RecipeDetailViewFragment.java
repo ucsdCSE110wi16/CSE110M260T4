@@ -4,6 +4,7 @@ package com.ucsd.cse110.recipeforsuccess;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,11 +50,19 @@ import android.widget.Toast;
 public class RecipeDetailViewFragment extends Fragment {
 
     private ImageView iv;  //variable for image
+    float oldRating;
+    float userRating;
+    float ratingSum;
+    float numberTimesRated;
+    RatingBar recipeRateBar;
+    TextView rateText;
+    Button buttonSubmit;
     //private ParseObject recipe;
 
     String objectID = null;
     String recipeName = null;
-    ParseObject parseObject = null;
+    ParseObject parseObject;
+
 
     public RecipeDetailViewFragment() {
     }
@@ -74,13 +83,59 @@ public class RecipeDetailViewFragment extends Fragment {
 
         // Required empty public constructor
         getActivity().getWindow().getDecorView().setBackgroundColor(Color.WHITE);
-
+        RatingBarClass rateBarOn = new RatingBarClass();
+        rateBarOn.listenerForRatingBar(v);
+        rateBarOn.onButtonClick(v);
         getRecipeDetails(v);
         fillInViewContents(v);
 
 
         return v;
     }
+
+    public class RatingBarClass extends AppCompatActivity {
+
+        public void listenerForRatingBar(View v) {
+            recipeRateBar = (RatingBar) v.findViewById(R.id.ratingBar);
+            rateText = (TextView) v.findViewById(R.id.textView5);
+
+            recipeRateBar.setOnRatingBarChangeListener(
+                    new RatingBar.OnRatingBarChangeListener() {
+                        @Override
+                        public void onRatingChanged(RatingBar recipeRatingBar, float rating, boolean clicked) {
+                            //rateText.setText(String.valueOf(rating));
+                            userRating = rating;
+                        }
+                    }
+            );
+
+        }
+
+
+        //@Override
+        public void onButtonClick(View v) {
+            recipeRateBar = (RatingBar) v.findViewById(R.id.ratingBar);
+            buttonSubmit = (Button) v.findViewById(R.id.button2);
+
+            buttonSubmit.setOnClickListener(
+                new View.OnClickListener() {
+                    //@Override
+                    public void onClick(View v) {
+                        float newRating = ((ratingSum+userRating)/(numberTimesRated + 1));
+                        recipeRateBar.setRating(newRating);
+                        parseObject.put("Rating", newRating);
+                        parseObject.put("HowManyTimesRated", (numberTimesRated + 1));
+                        parseObject.put("RatingSum", (ratingSum+userRating));
+                        parseObject.saveInBackground();
+
+                    }
+                }
+            );
+
+        }
+
+    }
+
 
         //used in get recipe details; runs a second tread to load the image with url
 
@@ -148,7 +203,7 @@ public class RecipeDetailViewFragment extends Fragment {
 
                 int num_search_results = recipeList.size();
                 for (ParseObject recipe : recipeList) {
-
+                    parseObject = recipe;
                     // getting recipe title and changing font
                     TextView recipeTitleBox = (TextView) v.findViewById(R.id.recipeTitle);
                     Typeface typeFace = Typeface.createFromAsset(getContext().getAssets(), "Pacifico.ttf");
@@ -178,8 +233,12 @@ public class RecipeDetailViewFragment extends Fragment {
                     loadImage.execute(url);
 
                     // getting recipe rating
-                    RatingBar recipeRateBar = (RatingBar) v.findViewById(R.id.ratingBar);
-                    recipeRateBar.setRating(Integer.parseInt(recipe.get("Rating").toString()));
+                    oldRating = Float.parseFloat(recipe.get("Rating").toString());
+                    ratingSum = Float.parseFloat(recipe.get("RatingSum").toString());
+                    numberTimesRated = Integer.parseInt(recipe.get("HowManyTimesRated").toString());
+                    recipeRateBar = (RatingBar) v.findViewById(R.id.ratingBar);
+                    recipeRateBar.setRating(oldRating);
+
 
 
                 }
