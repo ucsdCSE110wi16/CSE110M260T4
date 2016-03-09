@@ -86,14 +86,6 @@
             android:layout_below="@+id/ratingBar"
             android:layout_centerHorizontal="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text=""
-            android:id="@+id/textView5"
-            android:layout_below="@+id/recipeTitle"
-            android:layout_centerHorizontal="true" />
 
 
     </RelativeLayout>

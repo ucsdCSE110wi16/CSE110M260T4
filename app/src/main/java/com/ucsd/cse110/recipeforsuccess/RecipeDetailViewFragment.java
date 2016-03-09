@@ -9,13 +9,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.NumberPicker;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.graphics.Typeface;
 
 import com.parse.FindCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -28,21 +26,10 @@ import java.net.URL;
 import java.net.HttpURLConnection;
 import java.io.InputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
-import java.net.URL;
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.view.Menu;
-import android.widget.ImageView;
-
-
-
 import android.widget.Button;
-import android.widget.Toast;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,14 +37,15 @@ import android.widget.Toast;
 public class RecipeDetailViewFragment extends Fragment {
 
     private ImageView iv;  //variable for image
+
+    //varibales for rating
     float oldRating;
     float userRating;
     float ratingSum;
     float numberTimesRated;
     RatingBar recipeRateBar;
-    TextView rateText;
     Button buttonSubmit;
-    //private ParseObject recipe;
+
 
     String objectID = null;
     String recipeName = null;
@@ -93,17 +81,16 @@ public class RecipeDetailViewFragment extends Fragment {
         return v;
     }
 
+    // initializes listeners for rating bar
     public class RatingBarClass extends AppCompatActivity {
 
         public void listenerForRatingBar(View v) {
             recipeRateBar = (RatingBar) v.findViewById(R.id.ratingBar);
-            rateText = (TextView) v.findViewById(R.id.textView5);
 
             recipeRateBar.setOnRatingBarChangeListener(
                     new RatingBar.OnRatingBarChangeListener() {
                         @Override
                         public void onRatingChanged(RatingBar recipeRatingBar, float rating, boolean clicked) {
-                            //rateText.setText(String.valueOf(rating));
                             userRating = rating;
                         }
                     }
@@ -122,7 +109,9 @@ public class RecipeDetailViewFragment extends Fragment {
                     //@Override
                     public void onClick(View v) {
                         float newRating = ((ratingSum+userRating)/(numberTimesRated + 1));
-                        recipeRateBar.setRating(newRating);
+                        recipeRateBar.setRating(newRating); // change rating on recipe view page
+
+                        //updates rating in database
                         parseObject.put("Rating", newRating);
                         parseObject.put("HowManyTimesRated", (numberTimesRated + 1));
                         parseObject.put("RatingSum", (ratingSum+userRating));
@@ -136,9 +125,7 @@ public class RecipeDetailViewFragment extends Fragment {
 
     }
 
-
-        //used in get recipe details; runs a second tread to load the image with url
-
+    //used in get recipe details; runs a second tread to load the image with url
     public class LoadImageFromURL extends AsyncTask<String, Void, Bitmap> {
 
         @Override
@@ -247,12 +234,9 @@ public class RecipeDetailViewFragment extends Fragment {
             }
         });
 
-
-
     }
 
     void fillInViewContents(View v) {
-        //TextView recipeTitleBox = (TextView) this.v.findViewById(R.id.recipeTitle);
-        //recipeTitleBox.setText(this.recipeName.toUpperCase());
+
     }
 }
