@@ -20,9 +20,7 @@ import static org.hamcrest.Matchers.hasToString;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 
-/**
- * Created by ellimag on 3/4/16.
- */
+
 public class TestRecipePage {
 
     public static final String STRING_TO_BE_TYPED = "chocolate chip cookies";
@@ -52,16 +50,18 @@ public class TestRecipePage {
                     .perform(click());
 
 
-
+        Thread.sleep(2000);
         //Confirm we got the recipe detail page
 
         onView(allOf(withText(RECIPE_TITLE))).perform(click());
-
+        Thread.sleep(2000);
         //checks all elements are on the recipe page and scrolls the page
-        onView(withId(R.id.ratingBar)).check(matches(isDisplayed()));
         onView(withId(R.id.imageView2)).check(matches(isDisplayed()));
         onView(withId(R.id.recipeTitle)).check(matches(isDisplayed()));
+        onView(withId(R.id.ratingBar)).check(matches(isDisplayed())).perform(ViewActions.swipeUp());
+        Thread.sleep(2000);
         onView(withId(R.id.recipeDetails)).check(matches(isDisplayed())).perform(ViewActions.swipeUp());
+        Thread.sleep(2000);
         onView(withId(R.id.recipeIngredients)).perform(ViewActions.scrollTo());
         Thread.sleep(2000);
         onView(withId(R.id.recipeIngredients)).check(matches(isDisplayed()));
