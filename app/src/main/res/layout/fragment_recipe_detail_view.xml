@@ -41,11 +41,10 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/recipeIngredients"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:layout_below="@+id/recipeDetails"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="false"  />
-
 
 
         <TextView
@@ -53,11 +52,10 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/recipeInstructions"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:layout_below="@+id/recipeIngredients"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="false"/>
-
 
 
         <ImageView
@@ -71,21 +69,24 @@
         <RatingBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="0dp"
             android:id="@+id/ratingBar"
             android:layout_below="@+id/imageView2"
+            android:numStars="5"
+            android:layout_marginLeft="12dp"
             android:layout_centerHorizontal="true"
-            android:numStars="5" />
+            android:progressTint="#FFD64B" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Submit"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:text="Submit Rating"
             android:id="@+id/button2"
+            android:background="#FFD64B"
             android:layout_below="@+id/ratingBar"
-            android:layout_centerHorizontal="true" />
-
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="25dp" />
 
 
     </RelativeLayout>

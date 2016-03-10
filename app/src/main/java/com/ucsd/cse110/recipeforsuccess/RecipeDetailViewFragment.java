@@ -69,6 +69,11 @@ public class RecipeDetailViewFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_recipe_detail_view, container, false);
 
+        // Styling rating button
+        TextView rateButton = (TextView) v.findViewById(R.id.button2);
+        Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "Slabo13px-Regular.ttf");
+        rateButton.setTypeface(tf);
+
         // Required empty public constructor
         getActivity().getWindow().getDecorView().setBackgroundColor(Color.WHITE);
         RatingBarClass rateBarOn = new RatingBarClass();
